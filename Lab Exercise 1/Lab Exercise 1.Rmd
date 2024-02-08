@@ -29,10 +29,9 @@ session
 library(rvest)
 library(stringr)
 
-# Assuming you have a session object, replace "your_url_here" with the actual URL
+#url 
 session <- html_session("https://www.amazon.com/s?k=gaming+hats&_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=OBZiU&pd_rd_wg=PaoPW&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
 
-# Scraping text content from div elements with class "text_content"
 name <- session %>%
   html_nodes("h2") %>%
   html_text()
@@ -44,9 +43,8 @@ price <- session %>%
   html_nodes("span.a-price") %>%
   html_text()
 
-# Extract only the first occurrence of the price with a regular expression
-first_price <- str_extract(price[1:50], "\\$[0-9.]+")
 
+first_price <- str_extract(price[1:50], "\\$[0-9.]+")
 # Print or use the first price
 print(first_price)
 
@@ -86,10 +84,10 @@ session2
 library(rvest)
 library(stringr)
 
-# Assuming you have a session object, replace "your_url_here" with the actual URL
+#url
 session2 <- html_session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
 
-# Scraping text content from div elements with class "text_content"
+# 
 name2 <- session2 %>%
   html_nodes("h2") %>%
   html_text()
@@ -101,10 +99,10 @@ price2 <- session2 %>%
   html_nodes("span.a-price") %>%
   html_text()
 
-# Extract only the first occurrence of the price with a regular expression
+
 first_price2 <- str_extract(price2[1:48], "\\$[0-9.]+")
 
-# Print or use the first price
+# 
 print(first_price2)
 
 
@@ -145,10 +143,9 @@ session3
 library(rvest)
 library(stringr)
 
-# Assuming you have a session object, replace "your_url_here" with the actual URL
+
 session3 <- html_session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
 
-# Scraping text content from div elements with class "text_content"
 name3 <- session3 %>%
   html_nodes("h2") %>%
   html_text()
@@ -160,10 +157,10 @@ price3 <- session3 %>%
   html_nodes("span.a-price") %>%
   html_text()
 
-# Extract only the first occurrence of the price with a regular expression
+# 
 first_price3 <- str_extract(price3[1:2], "\\$[0-9.]+")
 
-# Print or use the first price
+# 
 print(first_price3)
 
 
