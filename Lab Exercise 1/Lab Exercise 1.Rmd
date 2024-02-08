@@ -9,180 +9,321 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 ```{r}
 library(rvest)
 library(dplyr)
 library(polite)
 library(stringr)
 
-url <- "https://www.amazon.com/s?k=gaming+apparel&_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&pd_rd_r=6f89a4d5-dba2-4e55-a1a2-d96e1f4ed24a&pd_rd_w=ZcbTl&pd_rd_wg=Mi21M&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=54Y32N62KZ83MAZMBG55&ref=pd_gw_unk"
+url <- "https://www.amazon.com/s?k=gaming+hats&_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=OBZiU&pd_rd_wg=PaoPW&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk"
 
 session <- bow(url, user_agent = "Educational Purposes")
 session
 ```
 
 
-
 ```{r}
-url1 <- "https://www.amazon.com/Video-Gamer-Men-Boys-Kids/dp/B0C3RQX7XN/ref=sr_1_1_sspa?_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&keywords=gaming+apparel&pd_rd_r=6f89a4d5-dba2-4e55-a1a2-d96e1f4ed24a&pd_rd_w=ZcbTl&pd_rd_wg=Mi21M&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=54Y32N62KZ83MAZMBG55&qid=1707353481&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1"
-  
-  shirt <- read_html(url1)
+library(rvest)
+library(stringr)
 
-#name
-onename <- shirt %>%
-  html_nodes("h1") %>%
+# Assuming you have a session object, replace "your_url_here" with the actual URL
+session <- html_session("https://www.amazon.com/s?k=gaming+hats&_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=OBZiU&pd_rd_wg=PaoPW&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+# Scraping text content from div elements with class "text_content"
+name <- session %>%
+  html_nodes("h2") %>%
   html_text()
 
-onename
-```
+one<- name[1:50]
+one
 
-
-```{r}
-oneprice <- shirt %>%
-  html_nodes("span.a-price-whole") %>%
+price <- session %>%
+  html_nodes("span.a-price") %>%
   html_text()
 
-pers <- oneprice[1]
-pers
-```
+# Extract only the first occurrence of the price with a regular expression
+first_price <- str_extract(price[1:50], "\\$[0-9.]+")
+
+# Print or use the first price
+print(first_price)
 
 
-```{r}
-oneratings <- shirt %>%
-  html_nodes("span.acrCustomerReviewText") %>%
+rating <- session %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
   html_text()
 
+three<- rating[1:50]
+three
 
-rate <- oneratings[1]
-rate
-```
-
-
-```{r}
-onerev <- shirt %>%
-  html_nodes("span.a-size-base") %>%
+review <- session %>%
+  html_nodes("span.a-icon-alt") %>%
   html_text()
 
-rev <- onerev[1]
-rev
-```
+four<- review[1:50]
+four
 
-
-
-```{r}
 frame1 <- data.frame(
-  Name = onename, 
-  Price = pers, 
-  Ratings = rate,
-  Review = rev
+  Name = one, 
+  Price = first_price, 
+  Rating = three, 
+  Reviews = four
 )
-
 frame1
-
-```
-
-
-two
-
-```{r}
-url2 <- "https://www.amazon.com/Star-Wars-Cantina-Tatooine-XXX-Large/dp/B07Q9XW328/ref=sr_1_2?_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&keywords=gaming+apparel&pd_rd_r=6f89a4d5-dba2-4e55-a1a2-d96e1f4ed24a&pd_rd_w=ZcbTl&pd_rd_wg=Mi21M&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=54Y32N62KZ83MAZMBG55&qid=1707353481&sr=8-2"
-  
-  shirt2 <- read_html(url2)
-
-#name
-twoname <- shirt2 %>%
-  html_nodes("h1") %>%
-  html_text()
-twoname 
-
-
-twoprice <- shirt2 %>%
-  html_nodes("span.a-price-whole") %>%
-  html_text()
-sec <- twoprice[1]
-sec
-
-
-
-tworatings <- shirt2 %>%
-  html_nodes("span.acrCustomerReviewText") %>%
-  html_text()
-tworat<- tworatings[1]
-tworat
-
-
-tworev <- shirt2 %>%
-  html_nodes("span.a-size-base") %>%
-  html_text()
-tworev<- tworev[1]
-tworev
 ```
 
 
 ```{r}
+url2 <- "https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk"
+
+session2 <- bow(url2, user_agent = "Educational Purposes")
+session2
+
+```
+```{r}
+library(rvest)
+library(stringr)
+
+# Assuming you have a session object, replace "your_url_here" with the actual URL
+session2 <- html_session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+# Scraping text content from div elements with class "text_content"
+name2 <- session2 %>%
+  html_nodes("h2") %>%
+  html_text()
+
+one2<- name2[1:48]
+one2
+
+price2 <- session2 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+# Extract only the first occurrence of the price with a regular expression
+first_price2 <- str_extract(price2[1:48], "\\$[0-9.]+")
+
+# Print or use the first price
+print(first_price2)
+
+
+rating2 <- session2 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three2<- rating2[1:48]
+three2
+
+review2 <- session2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four2<- review2[1:48]
+four2
+
 frame2 <- data.frame(
-  Name = onename, 
-  Price = sec, 
-  Ratings = tworat,
-  Review = tworev
+  Name = one2, 
+  Price = first_price2, 
+  Rating = three2, 
+  Reviews = four2
 )
-
 frame2
 ```
 
-three
 
 
 ```{r}
-url3 <- "https://www.amazon.com/Nintendo-Mens-Pixel-T-Shirt-Black/dp/B01IIHM20W/ref=sr_1_3?_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&keywords=gaming+apparel&pd_rd_r=6f89a4d5-dba2-4e55-a1a2-d96e1f4ed24a&pd_rd_w=ZcbTl&pd_rd_wg=Mi21M&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=54Y32N62KZ83MAZMBG55&qid=1707353481&sr=8-3"
-  
-  shirt3 <- read_html(url3)
+url3 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
 
-#name
-threename <- shirt3 %>%
-  html_nodes("h1") %>%
-  html_text()
+session3 <- bow(url3, user_agent = "Educational Purposes")
+session3
 
-threename
-```
-
-
-```{r}
-threeprice <- shirt3 %>%
-  html_nodes("span.aok-offscreen") %>%
-  html_text()
-
-thee<- threeprice[1]
-thee
-```
-
-
-```{r}
-threeratings <- shirt3 %>%
-  html_nodes("span.acrCustomerReviewText") %>%
-  html_text()
-theerat<- threeratings[1]
-theerat
-```
-
-
-```{r}
-threerev <- shirt3 %>%
-  html_nodes("span.a-size-base") %>%
-  html_text()
-theerev <- threerev[1]
-theerev
 ```
 
 ```{r}
+library(rvest)
+library(stringr)
+
+# Assuming you have a session object, replace "your_url_here" with the actual URL
+session3 <- html_session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+# Scraping text content from div elements with class "text_content"
+name3 <- session3 %>%
+  html_nodes("h2") %>%
+  html_text()
+
+one3<- name3[1:2]
+one3
+
+price3 <- session3 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+# Extract only the first occurrence of the price with a regular expression
+first_price3 <- str_extract(price3[1:2], "\\$[0-9.]+")
+
+# Print or use the first price
+print(first_price3)
+
+
+rating3 <- session3 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three3<- rating3[1:2]
+three3
+
+review3 <- session3 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four3<- review3[1:2]
+four3
+
 frame3 <- data.frame(
-  Name = threename, 
-  Price = thee, 
-  Ratings = theerat,
-  Review = theerev
+  Name = one3, 
+  Price = first_price3, 
+  Rating = three3, 
+  Reviews = four3
 )
-
 frame3
 ```
+
+```{r}
+combined_df <- rbind(frame1, frame2, frame3)
+print(combined_df)
+```
+
+
+Get the 25 Reviews each for 10 product. 
+
+```{r}
+#product1 
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr)
+
+urlone <- "https://www.amazon.com/product-reviews/B0CCP6HLZR/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+
+sessionone <- bow(urlone, user_agent = "Educational Purposes")
+sessionone
+```
+
+
+```{r}
+library(rvest)
+library(stringr)
+
+sessionone <- html_session("https://www.amazon.com/product-reviews/B0CCP6HLZR/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
+
+#name of reviewr
+namerev <- sessionone %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namer<- namerev[1:25]
+namer
+
+#date of review
+date <- sessionone %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+daterev<- date[1:25]
+daterev
+
+
+#individual rating
+rateindi <- sessionone %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indi<- rateindi[1:25]
+indi
+
+#Review comment 
+revcom <- sessionone %>%
+  html_nodes("span.a-size-base review-text review-text-content") %>%
+  html_text()
+
+revi<- revcom[1:25]
+revi
+
+framea <- data.frame(
+  Name = namer, 
+  Date = daterev, 
+  IndividualRating = indi, 
+  Review = revi
+)
+framea
+```
+
+```{r}
+url2 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+session2 <- bow(url2, user_agent = "Educational Purposes")
+session2
+```
+
+```{r}
+url3 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+session3 <- bow(url3, user_agent = "Educational Purposes")
+session3
+```
+
+```{r}
+url4 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+session4 <- bow(url4, user_agent = "Educational Purposes")
+session4
+```
+
+```{r}
+url5 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+session5 <- bow(url5, user_agent = "Educational Purposes")
+session5
+```
+
+
+```{r}
+url3 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+session6 <- bow(url6, user_agent = "Educational Purposes")
+session6
+```
+
+
+```{r}
+url7 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+session7 <- bow(url7, user_agent = "Educational Purposes")
+session7
+```
+
+```{r}
+url3 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+session8 <- bow(url8, user_agent = "Educational Purposes")
+session8
+```
+
+```{r}
+url9 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+session9 <- bow(url9, user_agent = "Educational Purposes")
+session9
+```
+
+```{r}
+url10 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+session10 <- bow(url10, user_agent = "Educational Purposes")
+session10
+```
+
 
 
