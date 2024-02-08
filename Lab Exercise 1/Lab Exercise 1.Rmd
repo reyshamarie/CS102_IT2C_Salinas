@@ -1,0 +1,188 @@
+---
+title: "Exercise 1"
+output: html_document
+date: "2024-02-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr)
+
+url <- "https://www.amazon.com/s?k=gaming+apparel&_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&pd_rd_r=6f89a4d5-dba2-4e55-a1a2-d96e1f4ed24a&pd_rd_w=ZcbTl&pd_rd_wg=Mi21M&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=54Y32N62KZ83MAZMBG55&ref=pd_gw_unk"
+
+session <- bow(url, user_agent = "Educational Purposes")
+session
+```
+
+
+
+```{r}
+url1 <- "https://www.amazon.com/Video-Gamer-Men-Boys-Kids/dp/B0C3RQX7XN/ref=sr_1_1_sspa?_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&keywords=gaming+apparel&pd_rd_r=6f89a4d5-dba2-4e55-a1a2-d96e1f4ed24a&pd_rd_w=ZcbTl&pd_rd_wg=Mi21M&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=54Y32N62KZ83MAZMBG55&qid=1707353481&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1"
+  
+  shirt <- read_html(url1)
+
+#name
+onename <- shirt %>%
+  html_nodes("h1") %>%
+  html_text()
+
+onename
+```
+
+
+```{r}
+oneprice <- shirt %>%
+  html_nodes("span.a-price-whole") %>%
+  html_text()
+
+pers <- oneprice[1]
+pers
+```
+
+
+```{r}
+oneratings <- shirt %>%
+  html_nodes("span.acrCustomerReviewText") %>%
+  html_text()
+
+
+rate <- oneratings[1]
+rate
+```
+
+
+```{r}
+onerev <- shirt %>%
+  html_nodes("span.a-size-base") %>%
+  html_text()
+
+rev <- onerev[1]
+rev
+```
+
+
+
+```{r}
+frame1 <- data.frame(
+  Name = onename, 
+  Price = pers, 
+  Ratings = rate,
+  Review = rev
+)
+
+frame1
+
+```
+
+
+two
+
+```{r}
+url2 <- "https://www.amazon.com/Star-Wars-Cantina-Tatooine-XXX-Large/dp/B07Q9XW328/ref=sr_1_2?_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&keywords=gaming+apparel&pd_rd_r=6f89a4d5-dba2-4e55-a1a2-d96e1f4ed24a&pd_rd_w=ZcbTl&pd_rd_wg=Mi21M&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=54Y32N62KZ83MAZMBG55&qid=1707353481&sr=8-2"
+  
+  shirt2 <- read_html(url2)
+
+#name
+twoname <- shirt2 %>%
+  html_nodes("h1") %>%
+  html_text()
+twoname 
+
+
+twoprice <- shirt2 %>%
+  html_nodes("span.a-price-whole") %>%
+  html_text()
+sec <- twoprice[1]
+sec
+
+
+
+tworatings <- shirt2 %>%
+  html_nodes("span.acrCustomerReviewText") %>%
+  html_text()
+tworat<- tworatings[1]
+tworat
+
+
+tworev <- shirt2 %>%
+  html_nodes("span.a-size-base") %>%
+  html_text()
+tworev<- tworev[1]
+tworev
+```
+
+
+```{r}
+frame2 <- data.frame(
+  Name = onename, 
+  Price = sec, 
+  Ratings = tworat,
+  Review = tworev
+)
+
+frame2
+```
+
+three
+
+
+```{r}
+url3 <- "https://www.amazon.com/Nintendo-Mens-Pixel-T-Shirt-Black/dp/B01IIHM20W/ref=sr_1_3?_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&keywords=gaming+apparel&pd_rd_r=6f89a4d5-dba2-4e55-a1a2-d96e1f4ed24a&pd_rd_w=ZcbTl&pd_rd_wg=Mi21M&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=54Y32N62KZ83MAZMBG55&qid=1707353481&sr=8-3"
+  
+  shirt3 <- read_html(url3)
+
+#name
+threename <- shirt3 %>%
+  html_nodes("h1") %>%
+  html_text()
+
+threename
+```
+
+
+```{r}
+threeprice <- shirt3 %>%
+  html_nodes("span.aok-offscreen") %>%
+  html_text()
+
+thee<- threeprice[1]
+thee
+```
+
+
+```{r}
+threeratings <- shirt3 %>%
+  html_nodes("span.acrCustomerReviewText") %>%
+  html_text()
+theerat<- threeratings[1]
+theerat
+```
+
+
+```{r}
+threerev <- shirt3 %>%
+  html_nodes("span.a-size-base") %>%
+  html_text()
+theerev <- threerev[1]
+theerev
+```
+
+```{r}
+frame3 <- data.frame(
+  Name = threename, 
+  Price = thee, 
+  Ratings = theerat,
+  Review = theerev
+)
+
+frame3
+```
+
+
