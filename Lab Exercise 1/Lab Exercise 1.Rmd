@@ -9,10 +9,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 ```{r}
+
+#Web Scraping for amazon
 library(rvest)
 library(dplyr)
 library(polite)
