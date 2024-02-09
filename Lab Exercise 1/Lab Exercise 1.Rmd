@@ -1,12 +1,9 @@
 ---
 title: "Reysha Marie S. Salinas IT2C  LAB Exercise 1"
-output: html_document
+output:
+  html_document: default
 date: "2024-02-08"
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 
 ```{r}
@@ -28,9 +25,10 @@ session
 ```{r}
 library(rvest)
 library(stringr)
-library(httr2)
+library(httr2) 
+library(dplyr)
 
-#url 
+
           session1 <- session("https://www.amazon.com/s?k=gaming+hats&_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=OBZiU&pd_rd_wg=PaoPW&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
 ```
 
@@ -776,8 +774,8 @@ framej
 ```{r}
 #data frame all reviewrs 
 
-products <- data.frame(
-  Product_1 = framea,
+products <- rbind(
+  Product_ = framea,
   Product_2 = frameb,
   Product_3 = framec,
   Product_4 = framed,
@@ -788,7 +786,7 @@ products <- data.frame(
   Product_9 = framei,
   Product_10 = framej
   
-)
+ )
 products
 ```
 
