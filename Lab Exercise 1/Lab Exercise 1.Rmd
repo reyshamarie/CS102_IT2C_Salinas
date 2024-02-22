@@ -13,7 +13,7 @@ library(rvest)
 library(dplyr)
 library(polite)
 library(stringr) 
-library(httr2)
+library(httr)
 
 url <- "https://www.amazon.com/s?k=gaming+hats&_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=OBZiU&pd_rd_wg=PaoPW&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk"
 
@@ -64,7 +64,10 @@ review <- session1 %>%
 
 four<- review[1:50]
 four
+```
 
+
+```{r}
 frame1 <- data.frame(
   Name = one, 
   Price = first_price, 
@@ -146,10 +149,8 @@ url3 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-i
 
 session3 <- bow(url3, user_agent = "Educational Purposes")
 session3
-```
 
 
-```{r}
 library(rvest)
 library(stringr)
 library(httr2)
@@ -204,590 +205,149 @@ frame3
 ```
 
 ```{r}
-combined_df <- rbind(frame1, frame2, frame3)
-print(combined_df)
+products12<- bind_rows(frame1, frame2, frame3)
+products12
 ```
+
+```{r}
+write.csv(products12,file = "ProductsReview100.csv")
+```
+
+
+
 
 
 Get the 25 Reviews each for 10 product. 
-
+FIRST PRODUCT
 ```{r}
 #product1 
-library(rvest)
-library(dplyr)
-library(polite)
-library(stringr)
 
-urlone <- "https://www.amazon.com/product-reviews/B0CCP6HLZR/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+urle <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
 
-sessionone <- bow(urlone, user_agent = "Educational Purposes")
-sessionone
-```
+sessiont <- bow(urle, user_agent = "Educational Purposes")
+sessiont
 
 
-```{r}
 library(rvest)
 library(stringr)
+library(httr2)
+library(httr) 
 
-sessionone <- html_session("https://www.amazon.com/product-reviews/B0CCP6HLZR/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
-```
 
+sessiont <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
 
-```{r}
 #name of reviewr
-namerev0 <- sessionone %>%
+
+namerev <- sessiont %>%
   html_nodes("span.a-profile-name") %>%
   html_text()
 
-namer<- namerev0[1:25]
+namer<- namerev[1:25]
 namer
-```
 
-
-```{r}
 #date of review
-date <- sessionone %>%
+date <- sessiont %>%
   html_nodes("span.review-date") %>%
   html_text()
-
-daterev<- date[1:25]
+date
+daterev <- date[1:25]
 daterev
 
 
 #individual rating
-rateindi <- sessionone %>%
+rateindi <- sessiont %>%
   html_nodes("span.a-icon-alt") %>%
   html_text()
 
 indi<- rateindi[1:25]
 indi
 
+
 #Review comment 
-revcom <- sessionone %>%
-  html_nodes("span.review-body") %>%
+revcom <- sessiont %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
   html_text()
 
 revi<- revcom[1:25]
+revi <- gsub("\n", "", revi)
 revi
 
-framea <- data.frame(
+framet1 <- data.frame(
   Name = namer, 
   Date = daterev, 
   IndividualRating = indi, 
   Review = revi
 )
-framea
+framet1
+
+write.csv(framet1, file = "PRODUCT1.csv")
 ```
-
+SECOND--------------------------
 ```{r}
-urltwo <- "https://www.amazon.com/product-reviews/B088TSR6YJ/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+#product1 
 
-sessiontwo <- bow(urltwo, user_agent = "Educational Purposes")
-sessiontwo
-```
+urlA <- "https://www.amazon.com/Kasa-Smart-Security-Detection-KC410S/dp/B08ZXJJTYJ/ref=pd_bxgy_img_d_sccl_1/147-1768349-8840755?pd_rd_w=ARzFU&content-id=amzn1.sym.2b132e63-5dcd-4ba1-be9f-9e044543d59f&pf_rd_p=2b132e63-5dcd-4ba1-be9f-9e044543d59f&pf_rd_r=40XCD9QEVQ2J7CCJ61KG&pd_rd_wg=Rim0n&pd_rd_r=0f2d8bce-8434-4f79-ba3d-7b4fa09d3006&pd_rd_i=B08ZXJJTYJ&th=1"
 
-
-```{r}
-library(rvest)
-library(stringr) 
-library(httr2)
-
-sessiontwo <- html_session("https://www.amazon.com/product-reviews/B000UXZQ42/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
-
-
-#name of reviewr
-
-namerev1 <- sessiontwo %>%
-  html_nodes("span.a-profile-name") %>%
-  html_text()
-
-namer1<- namerev1[1:25]
-namer1
-
-#date of review
-date1 <- sessiontwo %>%
-  html_nodes("span.review-date") %>%
-  html_text()
-
-daterev1<- date1[1:25]
-daterev1
-
-#individual rating
-rateindi1 <- sessiontwo %>%
-  html_nodes("span.a-icon-alt") %>%
-  html_text()
-
-indi1<- rateindi1[1:25]
-indi1
-
-#Review comment 
-revcom1 <- sessiontwo %>%
-  html_nodes("span.review-body") %>%
-  html_text()
-
-revi1<- revcom1[1:25]
-revi1
-
-frameb <- data.frame(
-  Name = namer1, 
-  Date = daterev1, 
-  IndividualRating = indi1, 
-  Review = revi1
-)
-frameb
-```
-
-```{r}
-urltree <- "https://www.amazon.com/product-reviews/B09B1HMJ9Z/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
-
-sessiontree <- bow(urltree, user_agent = "Educational Purposes")
-sessiontree
-```
-
-
-```{r}
-library(rvest)
-library(stringr) 
-library(httr2)
-
-sessiontree <- html_session("https://www.amazon.com/product-reviews/B000UXZQ42/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
-
-
-#name of reviewr
-
-namerev3 <- sessiontree %>%
-  html_nodes("span.a-profile-name") %>%
-  html_text()
-
-namer3<- namerev3[1:25]
-namer3
-
-#date of review
-date3 <- sessiontree %>%
-  html_nodes("span.review-date") %>%
-  html_text()
-
-daterev3<- date3[1:25]
-daterev3
-
-#individual rating
-rateindi3 <- sessiontree %>%
-  html_nodes("span.a-icon-alt") %>%
-  html_text()
-
-indi3<- rateindi3[1:25]
-indi3
-
-#Review comment 
-revcom3 <- sessiontree %>%
-  html_nodes("span.review-body") %>%
-  html_text()
-
-revi3<- revcom3[1:25]
-revi3
-
-framec <- data.frame(
-  Name = namer3, 
-  Date = daterev3, 
-  IndividualRating = indi3, 
-  Review = revi3
-)
-framec
-```
-
-```{r}
-urlfour <- "https://www.amazon.com/product-reviews/B01BYKV7I8/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
-
-sessionfour <- bow(urlfour, user_agent = "Educational Purposes")
-sessionfour 
-
-library(rvest)
-library(stringr) 
-library(httr2)
-
-sessionfour <- html_session("https://www.amazon.com/product-reviews/B01BYKV7I8/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
-
-
-#name of reviewr
-
-namerev4 <- sessionfour %>%
-  html_nodes("span.a-profile-name") %>%
-  html_text()
-
-namer4 <- namerev4[1:25]
-namer4
-
-#date of review
-date4 <- sessionfour %>%
-  html_nodes("span.review-date") %>%
-  html_text()
-
-daterev4<- date4[1:25]
-daterev4
-
-#individual rating
-rateindi4 <- sessionfour %>%
-  html_nodes("span.a-icon-alt") %>%
-  html_text()
-
-indi4<- rateindi4[1:25]
-indi4
-
-#Review comment 
-revcom4 <- sessionfour %>%
-  html_nodes("span.review-body") %>%
-  html_text()
-
-revi4 <- revcom4[1:25]
-revi4
-
-framed <- data.frame(
-  Name = namer4, 
-  Date = daterev4, 
-  IndividualRating = indi4, 
-  Review = revi4
-)
-framed
-```
-
-```{r}
-urlfive <- "https://www.amazon.com/product-reviews/B087Z5WDJ2/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
-
-sessionfive <- bow(urlfive, user_agent = "Educational Purposes")
-sessionfive
-
-library(rvest)
-library(stringr) 
-library(httr2)
-
-sessionfive <- html_session("https://www.amazon.com/product-reviews/B087Z5WDJ2/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
-
-
-#name of reviewr
-
-namerev5 <- sessionfive %>%
-  html_nodes("span.a-profile-name") %>%
-  html_text()
-
-namer5 <- namerev5[1:25]
-namer5
-
-#date of review
-date5 <- sessionfive %>%
-  html_nodes("span.review-date") %>%
-  html_text()
-
-daterev5<- date5[1:25]
-daterev5
-
-#individual rating
-rateindi5 <- sessionfive %>%
-  html_nodes("span.a-icon-alt") %>%
-  html_text()
-
-indi5<- rateindi5[1:25]
-indi5
-
-#Review comment 
-revcom5 <- sessionfive %>%
-  html_nodes("span.review-body") %>%
-  html_text()
-
-revi5 <- revcom5[1:25]
-revi5
-
-framee <- data.frame(
-  Name = namer4, 
-  Date = daterev4, 
-  IndividualRating = indi4, 
-  Review = revi4
-)
-framee
-```
-
-
-```{r}
-urlsix <- "https://www.amazon.com/product-reviews/B0B7NV73PJ/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
-
-sessionsix <- bow(urlsix, user_agent = "Educational Purposes")
-sessionsix
-
-library(rvest)
-library(stringr) 
-library(httr2)
-
-sessionsix <- html_session("https://www.amazon.com/product-reviews/B0B7NV73PJ/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
-
-
-#name of reviewr
-
-namerev6 <- sessionsix %>%
-  html_nodes("span.a-profile-name") %>%
-  html_text()
-namer6 <- namerev6[1:25]
-namer6
-
-#date of review
-date6 <- sessionsix %>%
-  html_nodes("span.review-date") %>%
-  html_text()
-
-daterev6 <- date6[1:25]
-daterev6
-
-#individual rating
-rateindi6 <- sessionsix %>%
-  html_nodes("span.a-icon-alt") %>%
-  html_text()
-indi6<- rateindi6[1:25]
-indi6
-
-#Review comment 
-revcom6 <- sessionsix %>%
-  html_nodes("span.review-body") %>%
-  html_text()
-
-revi6 <- revcom6[1:25]
-revi6
-
-framef <- data.frame(
-  Name = namer6, 
-  Date = daterev6, 
-  IndividualRating = indi6, 
-  Review = revi6
-)
-framef
-```
-
-
-```{r}
-urlseven <- "https://www.amazon.com/product-reviews/B0B8TC6KWF/ref=acr_dp_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
-
-sessionseven <- bow(urlseven, user_agent = "Educational Purposes")
-sessionseven
+sessionA <- bow(urlA, user_agent = "Educational Purposes")
+sessionA
 
 
 library(rvest)
-library(stringr) 
+library(stringr)
 library(httr2)
+library(httr) 
 
-sessionseven <- html_session("https://www.amazon.com/product-reviews/B0B8TC6KWF/ref=acr_dp_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
 
+sessiont <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
 
 #name of reviewr
 
-namerev7 <- sessionseven %>%
-  html_nodes("span.a-profile-name") %>%
-  html_text()
-namer7 <- namerev7[1:25]
-namer7
-
-#date of review
-date7 <- sessionseven %>%
-  html_nodes("span.review-date") %>%
-  html_text()
-
-daterev7 <- date7[1:25]
-daterev7
-
-#individual rating
-rateindi7 <- sessionseven %>%
-  html_nodes("span.a-icon-alt") %>%
-  html_text()
-indi7<- rateindi7[1:25]
-indi7
-
-#Review comment 
-revcom7 <- sessionseven %>%
-  html_nodes("span.review-body") %>%
-  html_text()
-
-revi7 <- revcom7[1:25]
-revi7
-
-frameg <- data.frame(
-  Name = namer7, 
-  Date = daterev7, 
-  IndividualRating = indi7, 
-  Review = revi7
-)
-frameg
-```
-
-```{r}
-url8 <- "https://www.amazon.com/product-reviews/B015OW3M1W/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
-
-session8 <- bow(url8, user_agent = "Educational Purposes")
-session8
-
-library(rvest)
-library(stringr) 
-library(httr2)
-
-sessioneit <- html_session("https://www.amazon.com/product-reviews/B015OW3M1W/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
-
-#name of reviewr
-
-namerev8 <- sessioneit %>%
-  html_nodes("span.a-profile-name") %>%
-  html_text()
-namer8 <- namerev8[1:25]
-namer8
-
-#date of review
-date8 <- sessioneit %>%
-  html_nodes("span.review-date") %>%
-  html_text()
-
-daterev8 <- date8[1:25]
-daterev8
-
-#individual rating
-rateindi8 <- sessioneit %>%
-  html_nodes("span.a-icon-alt") %>%
-  html_text()
-indi8<- rateindi8[1:25]
-indi8
-
-#Review comment 
-revcom8 <- sessioneit %>%
-  html_nodes("span.review-body") %>%
-  html_text()
-
-revi8 <- revcom8[1:25]
-revi8
-
-frameh <- data.frame(
-  Name = namer8, 
-  Date = daterev8, 
-  IndividualRating = indi8, 
-  Review = revi8
-)
-frameh
-```
-
-```{r}
-url9 <- "https://www.amazon.com/product-reviews/B07YDNSZQ3/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
-
-session9 <- bow(url9, user_agent = "Educational Purposes")
-session9
-
-library(rvest)
-library(stringr) 
-library(httr2)
-
-sessionin <- html_session("https://www.amazon.com/product-reviews/B07YDNSZQ3/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
-
-#name of reviewr
-
-namerev9 <- sessionin %>%
-  html_nodes("span.a-profile-name") %>%
-  html_text()
-namer9 <- namerev9[1:25]
-namer9
-
-#date of review
-date9 <- sessionin %>%
-  html_nodes("span.review-date") %>%
-  html_text()
-
-daterev9 <- date9[1:25]
-daterev9
-
-#individual rating
-rateindi9 <- sessionin %>%
-  html_nodes("span.a-icon-alt") %>%
-  html_text()
-indi9<- rateindi9[1:25]
-indi9
-
-#Review comment 
-revcom9 <- sessionin %>%
-  html_nodes("span.review-body") %>%
-  html_text()
-
-revi9 <- revcom9[1:25]
-revi9
-
-framei <- data.frame(
-  Name = namer9, 
-  Date = daterev9, 
-  IndividualRating = indi9, 
-  Review = revi9
-)
-framei
-```
-
-```{r}
-url10 <- "https://www.amazon.com/product-reviews/B07YDNSZQ3/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
-
-session10 <- bow(url10, user_agent = "Educational Purposes")
-session10
-
-library(rvest)
-library(stringr) 
-library(httr2)
-
-sessiont <- html_session("https://www.amazon.com/product-reviews/B07YDNSZQ3/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
-
-#name of reviewr
-
-namerev10 <- sessiont %>%
+namerevA <- sessiontA %>%
   html_nodes("span.a-profile-name") %>%
   html_text()
 
-namer10 <- namerev10[1:25]
-namer10
+namerA<- namerevA[1:25]
+namerA
 
 #date of review
-date10 <- sessiont %>%
+dateA <- sessiontA %>%
   html_nodes("span.review-date") %>%
   html_text()
+dateA
+daterevA <- date[1:25]
+daterevA
 
-daterev10 <- date10[1:25]
-daterev10
 
 #individual rating
-rateindi10 <- sessiont %>%
+rateindiA <- sessiontA %>%
   html_nodes("span.a-icon-alt") %>%
   html_text()
-indi10<- rateindi10[1:25]
-indi10
+
+indiA<- rateindiA[1:25]
+indiA
+
 
 #Review comment 
-revcom10 <- sessiont %>%
-  html_nodes("span.review-body") %>%
+revcomA <- sessiontA %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
   html_text()
 
-revi10 <- revcom10[1:25]
-revi10
+revi<- revcom[1:25]
+revi <- gsub("\n", "", revi)
+revi
 
-framej <- data.frame(
-  Name = namer10, 
-  Date = daterev10, 
-  IndividualRating = indi10, 
-  Review = revi10
+framet1 <- data.frame(
+  Name = namer, 
+  Date = daterev, 
+  IndividualRating = indi, 
+  Review = revi
 )
-framej
+framet1
+
+write.csv(framet1, file = "PRODUCT2.csv")
 ```
 
 ```{r}
-#data frame all reviewrs 
-
-products <- rbind(
-  Product_ = framea,
-  Product_2 = frameb,
-  Product_3 = framec,
-  Product_4 = framed,
-  Product_5 = framee,
-  Product_6 = framef,
-  Product_7 = frameg,
-  Product_8 = frameh,
-  Product_9 = framei,
-  Product_10 = framej
-  
- )
-products
+write.csv(products, file = "ProductReviews.csv")
 ```
-
 

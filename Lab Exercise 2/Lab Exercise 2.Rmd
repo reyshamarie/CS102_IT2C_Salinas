@@ -1,0 +1,211 @@
+---
+title: "Reysha Marie S. Salinas IT2C  LAB Exercise 2 "
+output: html_document
+date: "2024-02-15"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+(SCRAPE 5O PRODUCTS / 50 PRODUCTS 5O /name/type/date/individual/review)
+
+(50 PROCUCTS)
+
+```{r}
+#50 PRODUCTS
+
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr) 
+library(httr)
+
+url <- "https://www.amazon.com/s?k=gaming+mouse&_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&pd_rd_r=f8d96864-5ad7-4644-b8ce-0ba4d137eebd&pd_rd_w=qj3qe&pd_rd_wg=TloOW&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=D8MYB057CJN468PBZTDW&ref=pd_gw_unk"
+
+session <- bow(url, user_agent = "Educational Purposes")
+session
+```
+
+```{r}
+library(rvest)
+library(stringr)
+library(httr) 
+library(dplyr)
+
+
+          session1 <- session("https://www.amazon.com/s?k=gaming+mouse&_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&pd_rd_r=f8d96864-5ad7-4644-b8ce-0ba4d137eebd&pd_rd_w=qj3qe&pd_rd_wg=TloOW&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=D8MYB057CJN468PBZTDW&ref=pd_gw_unk")
+```
+
+
+
+```{r}
+name <- session1 %>%
+  html_nodes("span.a-size-base-plus.a-color-base.a-text-normal") %>%
+  html_text()
+
+names<- name[1:50]
+names
+```
+
+
+
+
+GET THE 50 REVIEWS EACH ON 50 PRODUCTS
+
+```{r}
+#product 25 name of reviewrs
+
+  url <- "https://www.amazon.com/s?k=gaming+mouse&_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&pd_rd_r=f8d96864-5ad7-4644-b8ce-0ba4d137eebd&pd_rd_w=qj3qe&pd_rd_wg=TloOW&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=D8MYB057CJN468PBZTDW&ref=pd_gw_unk"
+
+  session <- bow(url, user_agent = "Educational Purposes")
+  session
+
+  session11 <- session("https://www.amazon.com/s?k=gaming+mouse&_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&pd_rd_r=f8d96864-5ad7-4644-b8ce-0ba4d137eebd&pd_rd_w=qj3qe&pd_rd_wg=TloOW&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=D8MYB057CJN468PBZTDW&ref=pd_gw_unk")
+```
+
+
+```{r}
+#product 25 (NAMES)
+
+name1 <- session11 %>%
+  html_nodes("span.a-size-base-plus.a-color-base.a-text-normal") %>%
+  html_text()
+
+names1<- name1[1:25]
+names1
+
+
+```
+
+```{r}
+#product 25 (INDIVIDUAL RATING/DATE)
+ratedate <- sessionin11 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+ratedates<- ratedate[1:25]
+ratedates
+```
+
+
+```{r}
+#product 25 (TYPE OF PURCHASE)
+TypePurchase <- session11 %>%
+  html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+  html_text()
+
+Types<- TypePurchase[1:25]
+TYpes
+```
+
+
+```{r}
+#product 25 (REVIEWS)
+review <- session11 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+reviews<- review[1:25]
+reviews
+```
+
+
+  
+```{r}
+frame1 <- data.frame(
+  Name = names1,
+  RatingandDate = ratedates, 
+  TypeOfPurchase = Types,
+  Reviews = reviews
+)
+frame1
+```
+
+```{r}
+write.csv(frame1, file = "Lab2_25/50ProductReview")
+```
+
+```{r}
+------------------------------------------------------------------------------
+```
+
+LAST 25 REVIEWS FOR 50 PRODUCTS
+```{r}
+#product 25 name of reviewrs
+
+  url1 <- "https://www.amazon.com/s?k=gaming+mouse&_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&pd_rd_r=f8d96864-5ad7-4644-b8ce-0ba4d137eebd&pd_rd_w=qj3qe&pd_rd_wg=TloOW&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=D8MYB057CJN468PBZTDW&ref=pd_gw_unk"
+
+  session <- bow(url, user_agent = "Educational Purposes")
+  session
+
+  session2 <- session("https://www.amazon.com/s?k=gaming+mouse&_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&pd_rd_r=f8d96864-5ad7-4644-b8ce-0ba4d137eebd&pd_rd_w=qj3qe&pd_rd_wg=TloOW&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=D8MYB057CJN468PBZTDW&ref=pd_gw_unk")
+```
+
+
+```{r}
+#product 25(NAMES)
+
+name1 <- session2 %>%
+  html_nodes("span.a-size-base-plus.a-color-base.a-text-normal") %>%
+  html_text()
+
+names1<- name1[1:25]
+names1
+
+
+```
+
+```{r}
+#product 25 (INDIVIDUAL RATING/DATE)
+ratedate1 <- sessionin2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+ratedates1<- ratedate1[1:25]
+ratedates1
+```
+
+
+```{r}
+#product 25 (TYPE OF PURCHASE)
+TypePurchase1 <- session2 %>%
+  html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+  html_text()
+
+Types1<- TypePurchase1[1:25]
+TYpes1
+```
+
+
+```{r}
+#product 25 (REVIEWS)
+review1 <- session2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+reviews1<- review1[1:25]
+reviews1
+```
+
+
+  
+```{r}
+frame2 <- data.frame(
+  Name = names1,
+  RatingandDate = ratedates1, 
+  TypeOfPurchase = Types1,
+  Reviews = reviews1
+)
+frame2
+```
+
+
+```{r}
+data1 <- cbind(frame1, frame2)
+```
+
+```{r}
+write.csv(frame2, file = "Lab2_50/50ProductReview")
+```
+
+
+
