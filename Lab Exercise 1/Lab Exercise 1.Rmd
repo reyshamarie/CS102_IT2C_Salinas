@@ -6,6 +6,7 @@ date: "2024-02-08"
 ---
 
 
+200 PRODUCTS
 ```{r}
 
 #Web Scraping for amazon
@@ -15,25 +16,14 @@ library(polite)
 library(stringr) 
 library(httr)
 
-url <- "https://www.amazon.com/s?k=gaming+hats&_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=OBZiU&pd_rd_wg=PaoPW&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk"
+url <- "https://www.amazon.com/s?i=computers-intl-ship&bbn=16225007011&rh=n%3A16225007011%2Cn%3A172456%2Cp_n_sb_certificate_id%3A98614993011&dc&ds=v1%3ASTq7Fh3bj0QuQYjUes0MMO4pO6Wsn2OnsK3Jws%2BuJOc&qid=1708962779&rnid=98614992011&ref=sr_nr_p_n_sb_certificate_id_1"
 
 session <- bow(url, user_agent = "Educational Purposes")
 session
-```
 
 
-```{r}
-library(rvest)
-library(stringr)
-library(httr2) 
-library(dplyr)
+ session1 <- session ("https://www.amazon.com/s?i=computers-intl-ship&bbn=16225007011&rh=n%3A16225007011%2Cn%3A172456%2Cp_n_sb_certificate_id%3A98614993011&dc&ds=v1%3ASTq7Fh3bj0QuQYjUes0MMO4pO6Wsn2OnsK3Jws%2BuJOc&qid=1708962779&rnid=98614992011&ref=sr_nr_p_n_sb_certificate_id_1")
 
-
-          session1 <- session("https://www.amazon.com/s?k=gaming+hats&_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=OBZiU&pd_rd_wg=PaoPW&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
-```
-
-
-```{r}
 name <- session1 %>%
   html_nodes("h2") %>%
   html_text()
@@ -64,10 +54,7 @@ review <- session1 %>%
 
 four<- review[1:50]
 four
-```
 
-
-```{r}
 frame1 <- data.frame(
   Name = one, 
   Price = first_price, 
@@ -75,31 +62,15 @@ frame1 <- data.frame(
   Reviews = four
 )
 frame1
-```
 
-
-```{r}
 url2 <- "https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk"
 
 session2 <- bow(url2, user_agent = "Educational Purposes")
 session2
 
 
-```
-
-
-```{r}
-library(rvest)
-library(stringr) 
-library(httr2)
-
-
 session2 <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk") 
 
-```
-
-
-```{r}
 
 name2 <- session2 %>%
   html_nodes("h2") %>%
@@ -140,12 +111,9 @@ frame2 <- data.frame(
   Reviews = four2
 )
 frame2
-```
 
+url3 <- "https://www.amazon.com.au/s?k=Computers%2C+Components+%26+Accessories&i=electronics&rh=n%3A4885077051&page=4&c=ts&qid=1708949256&ts_id=4885077051&ref=sr_pg_4"
 
-
-```{r}
-url3 <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
 
 session3 <- bow(url3, user_agent = "Educational Purposes")
 session3
@@ -157,17 +125,14 @@ library(httr2)
 library(httr) 
 
 
-session3 <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
-
-```
+session3 <- session("https://www.amazon.com.au/s?k=Computers%2C+Components+%26+Accessories&i=electronics&rh=n%3A4885077051&page=4&c=ts&qid=1708949256&ts_id=4885077051&ref=sr_pg_4")
 
 
-```{r}
 name3 <- session3 %>%
   html_nodes("h2") %>%
   html_text()
 
-one3<- name3[1:2]
+one3<- name3[1:24]
 one3
 
 price3 <- session3 %>%
@@ -175,7 +140,7 @@ price3 <- session3 %>%
   html_text()
 
 # 
-first_price3 <- str_extract(price3[1:2], "\\$[0-9.]+")
+first_price3 <- str_extract(price3[1:24], "\\$[0-9.]+")
 
 # 
 print(first_price3)
@@ -185,14 +150,14 @@ rating3 <- session3 %>%
   html_nodes("span.a-size-base.s-underline-text") %>%
   html_text()
 
-three3<- rating3[1:2]
+three3<- rating3[1:24]
 three3
 
 review3 <- session3 %>%
   html_nodes("span.a-icon-alt") %>%
   html_text()
 
-four3<- review3[1:2]
+four3<- review3[1:24]
 four3
 
 frame3 <- data.frame(
@@ -202,16 +167,1298 @@ frame3 <- data.frame(
   Reviews = four3
 )
 frame3
+
+
+#Web Scraping for amazon
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr) 
+library(httr)
+
+
+
+url1p <- "https://www.amazon.com.au/b?node=4885077051&ref=lp_4851800051_nr_n_2"
+
+session <- bow(url1p, user_agent = "Educational Purposes")
+session
+
+session1p <- scrape(session)
+session1p
+
+name1 <- session1p %>%
+  html_nodes("h2") %>%
+  html_text()
+
+one1<- name1[1:24]
+one1
+
+price1 <- session1p %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+
+first_price1 <- str_extract(price1[1:24], "\\$[0-9.]+")
+# Print or use the first price
+print(first_price1)
+
+
+rating1<- session1p %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three1<- rating1[1:24]
+three1
+
+review1 <- session1p %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four1<- review1[1:24]
+four1
+
+frame11 <- data.frame(
+  Name = one1, 
+  Price = first_price1, 
+  Rating = three1, 
+  Reviews = four1
+)
+frame11
+
+
+url2p <- "https://www.amazon.com.au/s?k=Computers%2C+Components+%26+Accessories&i=electronics&rh=n%3A4885077051&page=2&c=ts&qid=1708948457&ts_id=4885077051&ref=sr_pg_2" 
+
+session1 <- bow(url2p, user_agent = "Educational Purposes")
+session1
+
+session2pt <- scrape(session1)
+session2pt
+
+
+
+name2p <- session2pt %>%
+  html_nodes("h2") %>%
+  html_text()
+
+one2p<- name2p[1:24]
+one2p
+
+price2p <- session2p %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+
+first_price2p <- str_extract(price2p[1:24], "\\$[0-9.]+")
+
+# 
+print(first_price2p)
+
+
+rating2p <- session2p %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three2p<- rating2p[1:24]
+three2p
+
+review2p <- session2p %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four2p<- review2p[1:24]
+four2p
+
+frame2p <- data.frame(
+  Name = one2p, 
+  Price = first_price2p, 
+  Rating = three2p, 
+  Reviews = four2p
+)
+frame2p
+
+url3p <- "https://www.amazon.com.au/s?k=Computers%2C+Components+%26+Accessories&i=electronics&rh=n%3A4885077051&page=3&c=ts&qid=1708948958&ts_id=4885077051&ref=sr_pg_3"
+
+session3 <- bow(url3p, user_agent = "Educational Purposes")
+session3
+
+
+session3p <- scrape(session3)
+session3p
+
+name3p<- session3p %>%
+  html_nodes("h2") %>%
+  html_text()
+
+one3p<- name3p[1:30]
+one3p
+
+price3p <- session3p %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+# 
+first_price3p <- str_extract(price3p[30], "\\$[0-9.]+")
+
+# 
+print(first_price3p)
+
+
+rating3p <- session3p %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three3p<- rating3p[1:30]
+three3p
+
+review3p <- session3p %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four3p<- review3p[1:30]
+four3p
+
+frame3p <- data.frame(
+  Name = one3p, 
+  Price = first_price3p, 
+  Rating = three3p, 
+  Reviews = four3p
+)
+frame3p
+```
+BIND
+```{r}
+products12<- bind_rows(frame1, frame2, frame3,frame11, frame2p, frame3p)
+products12
+
+
+```
+CSV
+```{r}
+write.csv(products12,file = "ProductsReview200.csv")
+```
+
+
+Get the 25 Reviews each for 10 product. 
+FIRST PRODUCT
+```{r}
+#product1 
+library(rvest)
+#product url 1
+
+url1A <- "https://www.amazon.com.au/product-reviews/B0BHSS55RM/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+
+session1 <-bow(url1A, user_agent = "Educational Purposes")
+sessiont1A <- scrape(session1)
+
+# name of reviewer
+namerev1A <- sessiont1A %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namer1A <- namerev1A[1:25] 
+namer1A
+
+# date of review
+date1A <- sessiont1A %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+daterev1A <- date1A[1:25]
+daterev1A
+# individual rating
+rateindi1A <- sessiont1A %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indi1A <- rateindi1A[1:25]
+
+# Review comment
+revcom1A <- sessiont1A %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+revi1A <- revcom1A[1:25]
+revi1A <- gsub("\n", "", revi1A)
+
+framet1 <- data.frame(
+  Name = namer1A, 
+  Date = daterev1A, 
+  IndividualRating = indi1A, 
+  Review = revi1A
+)
+framet1
+
+
+write.csv(framet1, file = "ReviewPRODUCT1.csv")
+```
+SECOND--------------------------
+```{r}
+#product2
+
+library(rvest)
+
+urlA <- "https://www.amazon.com.au/product-reviews/B0BTG4S29L/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+
+session12<-bow(urlA, user_agent = "Educational Purposes")
+sessiontA <- scrape(session12)
+
+# name of reviewer
+namerevA <- sessiontA %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerA <- namerevA[1:25]
+namerA
+# date of review
+dateA <- sessiontA %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+daterevA <- dateA[1:25]
+
+# individual rating
+rateindiA <- sessiontA %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiA <- rateindiA[1:25]
+indiA
+# Review comment
+revcomA <- sessiontA %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviA <- revcomA[1:25]
+reviA <- gsub("\n", "", reviA)
+
+frametA <- data.frame(
+  Name = namerA, 
+  Date = daterevA, 
+  IndividualRating = indiA, 
+  Review = reviA
+)
+frametA
+write.csv(frametA, file = "ReviewPRODUCT2.csv")
+
+```
+THIRD----
+```{r}
+
+urlB <- "https://www.amazon.com.au/product-reviews/B086WCG4SR/ref=p13n_ds_purchase_sim_1p_dp_desktop_d_sccl_1_2_cr/358-8254970-8794523?pd_rd_w=1SxUI&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=VX1KZQGA39ET6N51N4EP&pd_rd_wg=gaSN9&pd_rd_r=e92d4990-3f8e-486c-aebc-96f58ad50280&pd_rd_i=B086WCG4SR"
+
+thirdproduct <- "https://www.amazon.com.au/product-reviews/B086WCG4SR/ref=cm_cr_arp_d_viewopt_srt/358-8254970-8794523?pd_rd_w=1SxUI&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=VX1KZQGA39ET6N51N4EP&pd_rd_wg=gaSN9&pd_rd_r=e92d4990-3f8e-486c-aebc-96f58ad50280&pd_rd_i=B086WCG4SR&pageNumber=1&sortBy=recent"
+
+session1 <-bow(urlB, user_agent = "Educational Purposes")
+sessiontB <- scrape(session1)
+
+#2ndpart thrid product
+session13 <-bow(thirdproduct, user_agent = "Educational Purposes")
+sessiontB3 <- scrape(session13)
+
+#name of reviewr
+
+namerevB <- sessiontB %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerB<- namerevB[1:15]
+namerB
+
+#date of review
+dateB <- sessiontB %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateB
+daterevB<- dateB[1:15]
+
+daterevB
+
+
+#individual rating
+rateindiB <- sessiontB %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiB<- rateindiB[1:15]
+indiB
+
+
+#Review comment 
+revcomB <- sessiontB %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviB<- revcomB[1:15]
+reviB<- gsub("\n", "", reviB)
+reviB
+
+framet2 <- data.frame(
+  Name = namerB, 
+  Date = daterevB, 
+  IndividualRating = indiB, 
+  Review = reviB
+)
+framet2
+
+#2nd part 
+#name of reviewr
+
+namerevB3 <- sessiontB3 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerB3<- namerevB3[1:10]
+namerB3
+
+#date of review
+dateB3 <- sessiontB3 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateB3
+daterevB3<- dateB3[1:10]
+
+daterevB3
+
+
+#individual rating
+rateindiB3 <- sessiontB3 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiB3<- rateindiB3[1:10]
+indiB3
+
+
+#Review comment 
+revcomB3 <- sessiontB3 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviB3<- revcomB3[1:10]
+reviB3<- gsub("\n", "", reviB3)
+reviB3
+
+framet23 <- data.frame(
+  Name = namerB3, 
+  Date = daterevB3, 
+  IndividualRating = indiB3, 
+  Review = reviB3
+)
+framet23
+
+framet23_ <- bind_rows(framet2,framet23)
+framet23_
+write.csv(framet23_, file = "ReviewPRODUCT3.csv")
+```
+FOURTH
+```{r}
+library(rvest)
+library(dplyr)
+library(httr2)
+library(httr)
+library(purrr)
+
+
+product4 <- "https://www.amazon.com.au/product-reviews/B09TDTJKF1/ref=cm_cr_arp_d_viewopt_srt?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&sortBy=recent&pageNumber=1#reviews-filter-bar"
+product4_1 <-"https://www.amazon.com.au/product-reviews/B09TDTJKF1/ref=cm_cr_getr_d_paging_btm_next_2?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&sortBy=recent&pageNumber=2#reviews-filter-bar"
+
+sessiontC <- bow(product4, user_agent = "Educational Purposes")
+sessiontc <- scrape(sessiontC)
+sessiontc
+#second part /10 reviews
+sessiontC2 <- bow(product4_1, user_agent = "Educational Purposes")
+sessiontc2 <- scrape(sessiontC2)
+sessiontc2
+
+#name of reviewer
+namerevC <- sessiontc %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerC <- namerevC[1:12]
+
+#date of review
+dateC <- sessiontc %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+daterevC <- dateC[1:12]
+
+#individual rating
+rateindiC <- sessiontc %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiC <- rateindiC[1:12]
+
+#Review comment 
+revcomC <- sessiontc %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviC <- revcomC[1:12]
+reviC <- gsub("\n", "", reviC)
+
+framet4 <- data.frame(
+  Name = namerC, 
+  Date = daterevC, 
+  IndividualRating = indiC, 
+  Review = reviC
+)
+framet4
+# second part /10 reviews
+namerevC2 <- sessiontc2 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerC2 <- namerevC2[1:13]
+
+#date of review
+dateC2 <- sessiontc2 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+daterevC2 <- dateC2[1:13]
+
+#individual rating
+rateindiC2 <- sessiontc2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiC2 <- rateindiC2[1:13]
+
+#Review comment 
+revcomC2 <- sessiontc2 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviC2 <- revcomC2[1:13]
+reviC2 <- gsub("\n", "", reviC2)
+
+framet42 <- data.frame(
+  Name = namerC2, 
+  Date = daterevC2, 
+  IndividualRating = indiC2, 
+  Review = reviC2
+)
+framet42
+framet4_ <- bind_rows(framet4,framet42)
+framet4_
+
+write.csv(framet4_, file = "ReviewPRODUCT4.csv")
+
+```
+FIFTH
+```{r}
+#product1 
+
+product5 <- "https://www.amazon.com/product-reviews/B0C7GYX6MH/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+product5_2 <- "https://www.amazon.com/product-reviews/B0C7GYX6MH/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+
+sessiontd <- bow(product5, user_agent = "Educational Purposes")
+sessiontd
+#part two/13 reviews
+sessiontd2 <- bow(product5_2, user_agent = "Educational Purposes")
+sessiontd2
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+sessiond <- scrape(sessiontd)
+sessiond
+sessiond2<- scrape(sessiontd2)
+sessiond2
+
+
+#part two/13 reviews
+
+namerevD2 <- sessiond2 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerD2<- namerevD2[1:12]
+namerD2
+
+#date of review
+dateD2<- sessiond2 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateD2
+daterevD2<- dateD2[1:12]
+daterevD2
+
+
+#individual rating
+rateindiD2 <- sessiond2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiD2<- rateindiD2[1:12]
+indiD2
+
+
+#Review comment 
+revcomD2 <- sessiond2 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviD2<- revcomD2[1:12]
+reviD2 <- gsub("\n", "", reviD2)
+reviD2
+
+framet52 <- data.frame(
+  Name = namerD2, 
+  Date = daterevD2, 
+  IndividualRating = indiD2, 
+  Review = reviD2
+)
+framet52
+
+#name of reviewr
+
+namerevD <- sessiond %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerD<- namerevD[1:13]
+namerD
+
+#date of review
+dateD <- sessiond %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateD
+daterevD <- dateD[1:13]
+daterevD
+
+
+#individual rating
+rateindiD <- sessiond %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiD<- rateindiD[1:13]
+indiD
+
+
+#Review comment 
+revcomD <- sessiond %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviD<- revcomD[1:13]
+reviD <- gsub("\n", "", reviD)
+reviD
+
+framet5 <- data.frame(
+  Name = namerD, 
+  Date = daterevD, 
+  IndividualRating = indiD, 
+  Review = reviD
+)
+framet5
+
+framet5_ <- bind_rows(framet5,framet52)
+framet5_
+
+write.csv(framet5_, file = "ReviewPRODUCT5.csv")
+```
+SIXTH
+```{r}
+#product1 
+library(polite)
+product6 <- "https://www.amazon.com.au/product-reviews/B0BC2C71H1/ref=cm_cr_arp_d_viewopt_rvwer/358-8254970-8794523?pd_rd_w=KeGty&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=P3F3GQJHZ7WCD2Y0ZGF2&pd_rd_wg=Wek4F&pd_rd_r=62d0ea19-08ae-4795-b3f8-c2bbeaf43ea9&pd_rd_i=B0BC2C71H1&reviewerType=avp_only_reviews&pageNumber=1"
+
+
+#product6 
+#Part one 13 reviews
+
+sessiont <- bow(product6, user_agent = "Educational Purposes")
+sessiont
+
+
+sessiont <- session("https://www.amazon.com.au/product-reviews/B0BC2C71H1/ref=cm_cr_arp_d_viewopt_rvwer/358-8254970-8794523?pd_rd_w=KeGty&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=P3F3GQJHZ7WCD2Y0ZGF2&pd_rd_wg=Wek4F&pd_rd_r=62d0ea19-08ae-4795-b3f8-c2bbeaf43ea9&pd_rd_i=B0BC2C71H1&reviewerType=avp_only_reviews&pageNumber=1")
+
+#name of reviewr
+
+namerev <- sessiont %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namer<- namerev[1:13]
+namer
+
+#date of review
+date <- sessiont %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date
+daterev <- date[1:13]
+daterev
+
+
+#individual rating
+rateindi <- sessiont %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indi<- rateindi[1:13]
+indi
+
+
+#Review comment 
+revcom <- sessiont %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+revi<- revcom[1:13]
+revi <- gsub("\n", "", revi)
+revi
+
+framet <- data.frame(
+  Name = namer, 
+  Date = daterev, 
+  IndividualRating = indi, 
+  Review = revi
+)
+framet
+#product 12 reviews
+
+#Part two 12 reviews
+
+product6_2 <- "https://www.amazon.com.au/product-reviews/B0BC2C71H1/ref=cm_cr_getr_d_paging_btm_next_3/358-8254970-8794523?pd_rd_w=KeGty&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=P3F3GQJHZ7WCD2Y0ZGF2&pd_rd_wg=Wek4F&pd_rd_r=62d0ea19-08ae-4795-b3f8-c2bbeaf43ea9&pd_rd_i=B0BC2C71H1&reviewerType=avp_only_reviews&pageNumber=3"
+
+sessiont2 <- bow(product6_2, user_agent = "Educational Purposes")
+sessiont2
+
+
+sessiontF1 <- session("https://www.amazon.com.au/product-reviews/B084TNSDHN/ref=cm_cr_arp_d_viewopt_rvwer/358-8254970-8794523?pd_rd_w=KeGty&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=P3F3GQJHZ7WCD2Y0ZGF2&pd_rd_wg=Wek4F&pd_rd_r=62d0ea19-08ae-4795-b3f8-c2bbeaf43ea9&pd_rd_i=B084TNSDHN&filterByStar=five_star&pageNumber=1&formatType=current_format&reviewerType=all_reviews&sortBy=helpful")
+
+#name of reviewr
+
+namerevF1 <- sessiontF1 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerF1<- namerevF1[1:12]
+namerF1
+
+#date of review
+dateF1 <- sessiontF1 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateF1
+daterevF1 <- dateF1[1:12]
+daterevF1
+
+
+#individual rating
+rateindiF1 <- sessiontF1 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiF1<- rateindiF1[1:12]
+indiF1
+
+
+#Review comment 
+revcomF1 <- sessiontF1 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviF1<- revcomF1[1:12]
+reviF1 <- gsub("\n", "", reviF1)
+
+reviF1
+
+framet2 <- data.frame(
+  Name = namerF1, 
+  Date = daterevF1, 
+  IndividualRating = indiF1, 
+  Review = reviF1
+)
+framet2
+
+framet6<- bind_rows(framet,framet2)
+framet6
+write.csv(framet6, file = "ReviewsPRODUCT6.csv")
+```
+SEVENT
+```{r}
+#product1 
+#Part one 13 reviews
+urlF <- "https://www.amazon.com.au/product-reviews/B084TNSDHN/ref=cm_cr_arp_d_viewopt_srt/358-8254970-8794523?pd_rd_w=KeGty&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=P3F3GQJHZ7WCD2Y0ZGF2&pd_rd_wg=Wek4F&pd_rd_r=62d0ea19-08ae-4795-b3f8-c2bbeaf43ea9&pd_rd_i=B084TNSDHN&filterByStar=four_star&pageNumber=1&formatType=current_format&reviewerType=avp_only_reviews&sortBy=recent"
+
+sessiontF <- bow(urlF, user_agent = "Educational Purposes")
+sessiontF
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+sessiontF <- session("https://www.amazon.com.au/product-reviews/B084TNSDHN/ref=cm_cr_arp_d_viewopt_srt/358-8254970-8794523?pd_rd_w=KeGty&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=P3F3GQJHZ7WCD2Y0ZGF2&pd_rd_wg=Wek4F&pd_rd_r=62d0ea19-08ae-4795-b3f8-c2bbeaf43ea9&pd_rd_i=B084TNSDHN&filterByStar=four_star&pageNumber=1&formatType=current_format&reviewerType=avp_only_reviews&sortBy=recent")
+
+#name of reviewr
+
+namerevF <- sessiontF %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerF<- namerevF[1:13]
+namerF
+
+#date of review
+dateF <- sessiontF %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateF
+daterevF <- dateF[1:13]
+daterevF
+
+
+#individual rating
+rateindiF <- sessiontF %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiF<- rateindiF[1:13]
+indiF
+
+
+#Review comment 
+revcomF <- sessiontF %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviF<- revcomF[1:13]
+reviF <- gsub("\n", "", reviF)
+reviF
+
+framet7 <- data.frame(
+  Name = namerF, 
+  Date = daterevF, 
+  IndividualRating = indiF, 
+  Review = reviF
+)
+framet7
+#product 12 reviews
+
+#Part two 12 reviews
+urlF2 <- "https://www.amazon.com.au/product-reviews/B084TNSDHN/ref=cm_cr_arp_d_viewopt_rvwer/358-8254970-8794523?pd_rd_w=KeGty&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=P3F3GQJHZ7WCD2Y0ZGF2&pd_rd_wg=Wek4F&pd_rd_r=62d0ea19-08ae-4795-b3f8-c2bbeaf43ea9&pd_rd_i=B084TNSDHN&filterByStar=five_star&pageNumber=1&formatType=current_format&reviewerType=all_reviews&sortBy=helpful"
+
+sessiontF2 <- bow(urlF2, user_agent = "Educational Purposes")
+sessiontF2
+
+
+sessiontF2 <- session("https://www.amazon.com.au/product-reviews/B084TNSDHN/ref=cm_cr_arp_d_viewopt_rvwer/358-8254970-8794523?pd_rd_w=KeGty&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=P3F3GQJHZ7WCD2Y0ZGF2&pd_rd_wg=Wek4F&pd_rd_r=62d0ea19-08ae-4795-b3f8-c2bbeaf43ea9&pd_rd_i=B084TNSDHN&filterByStar=five_star&pageNumber=1&formatType=current_format&reviewerType=all_reviews&sortBy=helpful")
+
+#name of reviewr
+
+namerevF2 <- sessiontF2 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerF2<- namerevF2[1:12]
+namerF2
+
+#date of review
+dateF2 <- sessiontF2 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateF2
+daterevF2 <- dateF2[1:12]
+daterevF2
+
+
+#individual rating
+rateindiF2 <- sessiontF2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiF2<- rateindiF2[1:12]
+indiF2
+
+
+#Review comment 
+revcomF2 <- sessiontF2 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviF2<- revcomF2[1:12]
+reviF2 <- gsub("\n", "", reviF2)
+
+reviF2
+
+framet72 <- data.frame(
+  Name = namerF2, 
+  Date = daterevF2, 
+  IndividualRating = indiF2, 
+  Review = reviF2
+)
+framet72
+
+framet7_ <- bind_rows(framet7,framet72)
+framet7_
+write.csv(framet7_, file = "ReviewsPRODUCT7.csv")
+```
+EIGHT---
+```{r}
+#product8 
+
+urlG <- "https://www.amazon.com.au/product-reviews/B085G63QHT/ref=cm_cr_arp_d_viewopt_sr/358-8254970-8794523?pd_rd_w=nqMzK&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=MC2TYYP6DMVRAQZEWADY&pd_rd_wg=15aLU&pd_rd_r=c3604fac-49c7-4ff3-ab50-1c14e518d84d&pd_rd_i=B085G63QHT&filterByStar=critical&pageNumber=1"
+
+sessiontG <- bow(urlG, user_agent = "Educational Purposes")
+sessiontG
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+sessiontG <- session("https://www.amazon.com.au/product-reviews/B085G63QHT/ref=cm_cr_arp_d_viewopt_sr/358-8254970-8794523?pd_rd_w=nqMzK&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=MC2TYYP6DMVRAQZEWADY&pd_rd_wg=15aLU&pd_rd_r=c3604fac-49c7-4ff3-ab50-1c14e518d84d&pd_rd_i=B085G63QHT&filterByStar=critical&pageNumber=1")
+
+#name of reviewr
+
+namerevG <- sessiontG %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerG<- namerevG[1:12]
+namerG
+
+#date of review
+dateG <- sessiontG %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateG
+daterevG <- dateG[1:12]
+daterevG
+
+
+#individual rating
+rateindiG <- sessiontG %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiG<- rateindiG[1:12]
+indiG
+
+
+#Review comment 
+revcomG <- sessiontG %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviG<- revcomG[1:12]
+reviG <- gsub("\n", "", reviG)
+reviG
+
+framet8 <- data.frame(
+  Name = namerG, 
+  Date = daterevG, 
+  IndividualRating = indiG, 
+  Review = reviG
+)
+framet8
+
+#part two for 12 reviews
+
+urG <- "https://www.amazon.com.au/product-reviews/B085G63QHT/ref=cm_cr_arp_d_viewopt_sr/358-8254970-8794523?pd_rd_w=nqMzK&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=MC2TYYP6DMVRAQZEWADY&pd_rd_wg=15aLU&pd_rd_r=c3604fac-49c7-4ff3-ab50-1c14e518d84d&pd_rd_i=B085G63QHT&filterByStar=positive&pageNumber=1"
+
+sessionG <- bow(urG, user_agent = "Educational Purposes")
+sessionG
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+sessionG <- session("https://www.amazon.com.au/product-reviews/B085G63QHT/ref=cm_cr_arp_d_viewopt_sr/358-8254970-8794523?pd_rd_w=nqMzK&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=MC2TYYP6DMVRAQZEWADY&pd_rd_wg=15aLU&pd_rd_r=c3604fac-49c7-4ff3-ab50-1c14e518d84d&pd_rd_i=B085G63QHT&filterByStar=positive&pageNumber=1")
+
+#name of reviewr
+
+namereG <- sessionG %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+nameG<- namereG[1:13]
+nameG
+
+#date of review
+datG <- sessionG %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+datG
+datereG <- datG[1:13]
+datereG
+
+
+#individual rating
+rateindG <- sessionG %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indG<- rateindG[1:13]
+indG
+
+
+#Review comment 
+revcoG <- sessionG %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+revG<- revcoG[1:13]
+revG <- gsub("\n", "", revG)
+revG
+
+framet82 <- data.frame(
+  Name = nameG, 
+  Date = datereG, 
+  IndividualRating = indG, 
+  Review = revG
+)
+framet82
+framet8_ <- bind_rows(framet8,framet82)
+framet8_
+write.csv(framet8_, file = "ReviewPRODUCT8.csv")
+```
+NINETH
+```{r}
+#product9
+
+urlH <- "https://www.amazon.com.au/product-reviews/B085G63QHT/ref=cm_cr_arp_d_viewpnt_rgt/358-8254970-8794523?pd_rd_w=nqMzK&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=MC2TYYP6DMVRAQZEWADY&pd_rd_wg=15aLU&pd_rd_r=c3604fac-49c7-4ff3-ab50-1c14e518d84d&pd_rd_i=B085G63QHT&filterByStar=critical&pageNumber=1"
+
+sessiontH <- bow(urlH, user_agent = "Educational Purposes")
+sessiontH
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+sessiontH <- session("https://www.amazon.com.au/product-reviews/B085G63QHT/ref=cm_cr_arp_d_viewpnt_rgt/358-8254970-8794523?pd_rd_w=nqMzK&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=MC2TYYP6DMVRAQZEWADY&pd_rd_wg=15aLU&pd_rd_r=c3604fac-49c7-4ff3-ab50-1c14e518d84d&pd_rd_i=B085G63QHT&filterByStar=critical&pageNumber=1")
+
+#name of reviewr
+
+namerevH <- sessiontH %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerH<- namerevH[1:25]
+namerH
+
+#date of review
+dateH <- sessiontH %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateH
+daterevH <- dateH[1:25]
+daterevH
+
+
+#individual rating
+rateindiH <- sessiontH %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiH<- rateindiH[1:25]
+indiH
+
+
+#Review comment 
+revcomH <- sessiontH %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviH<- revcomH[1:25]
+reviH <- gsub("\n", "", reviH)
+reviH
+
+framet9 <- data.frame(
+  Name = namerH, 
+  Date = daterevH, 
+  IndividualRating = indiH, 
+  Review = reviH
+)
+framet9
+
+write.csv(framet9, file = "100_PRODUCT9.csv")
+```
+TENTH
+```{r}
+#product1 
+
+urle <- "https://www.amazon.com.au/product-reviews/B09B8YP8KY/ref=cm_cr_arp_d_viewpnt_lft/358-8254970-8794523?pd_rd_w=H67GR&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=3AKYM9QPH4FPGV2WWTV0&pd_rd_wg=cTVuK&pd_rd_r=68ad7cf9-3866-41d7-92f8-5bd39efe3eba&pd_rd_i=B09B8YP8KY&filterByStar=positive&pageNumber=1"
+
+sessiont <- bow(urle, user_agent = "Educational Purposes")
+sessiont
+
+
+
+sessiont <- session("https://www.amazon.com.au/product-reviews/B09B8YP8KY/ref=cm_cr_arp_d_viewpnt_lft/358-8254970-8794523?pd_rd_w=H67GR&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=3AKYM9QPH4FPGV2WWTV0&pd_rd_wg=cTVuK&pd_rd_r=68ad7cf9-3866-41d7-92f8-5bd39efe3eba&pd_rd_i=B09B8YP8KY&filterByStar=positive&pageNumber=1")
+
+#name of reviewr
+
+namerev <- sessiont %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namer<- namerev[1:25]
+namer
+
+#date of review
+date <- sessiont %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date
+daterev <- date[1:25]
+daterev
+
+
+#individual rating
+rateindi <- sessiont %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indi<- rateindi[1:25]
+indi
+
+
+#Review comment 
+revcom <- sessiont %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+revi<- revcom[1:25]
+revi <- gsub("\n", "", revi)
+revi
+
+framet1 <- data.frame(
+  Name = namer, 
+  Date = daterev, 
+  IndividualRating = indi, 
+  Review = revi
+)
+framet1
+
+
+write.csv(framet1, file = "ReviewPRODUCT10.csv")
+```
+
+ROWBIND
+```{r} 
+products<- bind_rows(framet1,framet9, framet8_,framet7_, framet6_, framet5_, framet4_, framet23_,frametA, framet1)
+products
+```
+CSV
+
+```{r} 
+write.csv(products, file = "ProductReviews.csv")
+```
+
+
+
+
+```{r}
+library(rvest)
+library(stringr)
+library(httr2) 
+library(dplyr)
+
+
+          session1p <- session("https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1708845383&ref=sr_pg_1")
+          session1p
+```
+
+
+```{r}
+name1 <- session1p %>%
+  html_nodes("h2") %>%
+  html_text()
+
+one1<- name1[1:50]
+one1
+
+price1 <- session1p %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+
+first_price1<- str_extract(price1[1:50], "\\$[0-9.]+")
+# Print or use the first price
+print(first_price1)
+
+
+rating1<- session1p %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three1<- rating1[1:50]
+three1
+
+review1 <- session1p %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four1<- review1[1:50]
+four1
+```
+
+
+```{r}
+frame11 <- data.frame(
+  Name = one1, 
+  Price = first_price1, 
+  Rating = three1, 
+  Reviews = four1
+)
+frame11
+```
+
+
+```{r}
+url2p <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1708845383&ref=sr_pg_1"
+
+session2p <- bow(url2p, user_agent = "Educational Purposes")
+session2p
+
+
+```
+
+
+```{r}
+library(rvest)
+library(stringr) 
+library(httr2)
+
+
+session2p <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk") 
+
+```
+
+
+```{r}
+
+name2p <- session2p %>%
+  html_nodes("h2") %>%
+  html_text()
+
+one2p<- name2p[1:48]
+one2p
+
+price2p <- session2p %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+
+first_price2p <- str_extract(price2p[1:48], "\\$[0-9.]+")
+
+# 
+print(first_price2p)
+
+
+rating2p <- session2p %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three2p<- rating2p[1:48]
+three2p
+
+review2p <- session2p %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four2p<- review2p[1:48]
+four2p
+
+frame2p <- data.frame(
+  Name = one2p, 
+  Price = first_price2p, 
+  Rating = three2p, 
+  Reviews = four2p
+)
+frame2p
+```
+
+
+
+```{r}
+url3p <- "https://www.amazon.com/s?k=gaming+hats&_encoding=UTF8&content-id=amzn1.sym.09483392-9ac6-434a-a3d7-39d83662f54a&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=OBZiU&pd_rd_wg=PaoPW&pf_rd_p=09483392-9ac6-434a-a3d7-39d83662f54a&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk"
+
+session3p <- bow(url3, user_agent = "Educational Purposes")
+session3p
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+session3p <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+```
+
+
+```{r}
+name3p<- session3p %>%
+  html_nodes("h2") %>%
+  html_text()
+
+one3p<- name3p[1:2]
+one3p
+
+price3p <- session3p %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+# 
+first_price3p <- str_extract(price3p[1:2], "\\$[0-9.]+")
+
+# 
+print(first_price3p)
+
+
+rating3p <- session3p %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three3p<- rating3p[1:2]
+three3p
+
+review3p <- session3p %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four3p<- review3p[1:2]
+four3p
+
+frame3p <- data.frame(
+  Name = one3p, 
+  Price = first_price3p, 
+  Rating = three3p, 
+  Reviews = four3p
+)
+frame3p
 ```
 
 ```{r}
-products12<- bind_rows(frame1, frame2, frame3)
+products12<- bind_rows(frame1, frame2, frame3,frame11, frame2p, frame3p)
 products12
 ```
 
 ```{r}
-write.csv(products12,file = "ProductsReview100.csv")
-```
+write.csv(products12,file = "ProductsReview200.csv")
 
 
 
@@ -280,16 +1527,16 @@ framet1 <- data.frame(
 )
 framet1
 
-write.csv(framet1, file = "PRODUCT1.csv")
+write.csv(framet1, file = "100_PRODUCT1.csv")
 ```
 SECOND--------------------------
 ```{r}
-#product1 
+#product2
 
 urlA <- "https://www.amazon.com/Kasa-Smart-Security-Detection-KC410S/dp/B08ZXJJTYJ/ref=pd_bxgy_img_d_sccl_1/147-1768349-8840755?pd_rd_w=ARzFU&content-id=amzn1.sym.2b132e63-5dcd-4ba1-be9f-9e044543d59f&pf_rd_p=2b132e63-5dcd-4ba1-be9f-9e044543d59f&pf_rd_r=40XCD9QEVQ2J7CCJ61KG&pd_rd_wg=Rim0n&pd_rd_r=0f2d8bce-8434-4f79-ba3d-7b4fa09d3006&pd_rd_i=B08ZXJJTYJ&th=1"
 
-sessionA <- bow(urlA, user_agent = "Educational Purposes")
-sessionA
+session <- bow(urlA, user_agent = "Educational Purposes")
+session
 
 
 library(rvest)
@@ -298,7 +1545,7 @@ library(httr2)
 library(httr) 
 
 
-sessiont <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+sessiontA <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
 
 #name of reviewr
 
@@ -332,6 +1579,314 @@ revcomA <- sessiontA %>%
   html_nodes("span.a-size-base.review-text.review-text-content") %>%
   html_text()
 
+reviA<- revcomA[1:25]
+reviA <- gsub("\n", "", revi)
+reviA
+
+framet2 <- data.frame(
+  Name = namerA, 
+  Date = daterevA, 
+  IndividualRating = indiA, 
+  Review = reviA
+)
+framet2
+
+write.csv(framet1, file = "100_PRODUCT2.csv")
+```
+THIRD----
+```{r}
+
+urlB <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+sessiontB <- bow(urlB, user_agent = "Educational Purposes")
+sessiontB
+
+sessiontB <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+#name of reviewr
+
+namerevB <- sessiontB %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerB<- namerevB[1:25]
+namerB
+
+#date of review
+dateB <- sessiontB %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateB
+daterevB<- dateB[1:25]
+daterevB
+
+
+#individual rating
+rateindiB <- sessiontB %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiB<- rateindiB[1:25]
+indiB
+
+
+#Review comment 
+revcomB <- sessiontB %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviB<- revcomB[1:25]
+reviB<- gsub("\n", "", reviB)
+reviB
+
+framet1 <- data.frame(
+  Name = namerB, 
+  Date = daterevB, 
+  IndividualRating = indiB, 
+  Review = reviB
+)
+framet1
+
+write.csv(framet1, file = "100_PRODUCT3.csv")
+```
+FOURTH
+```{r}
+library(rvest)
+library(dplyr)
+library(httr2)
+library(httr)
+library(purrr)
+
+
+urlC <- "https://www.amazon.com/product-reviews/B086PKMZ21/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+
+sessiontC <- bow(urlC, user_agent = "Educational Purposes")
+
+sessiontC <- session("https://www.amazon.com/product-reviews/B086PKMZ21/ref=acr_dpx_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar")
+#name of reviewer
+namerevC <- sessiontC %>%
+  make_request(urlC) %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerC <- namerevC[1:25]
+
+#date of review
+dateC <- sessiontC %>%
+  make_request(urlC) %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+daterevC <- dateC[1:25]
+
+#individual rating
+rateindiC <- sessiontC %>%
+  make_request(urlC) %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiC <- rateindiC[1:25]
+
+#Review comment 
+revcomC <- sessiontC %>%
+  make_request(urlC) %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviC <- revcomC[1:25]
+reviC <- gsub("\n", "", reviC)
+
+framet1 <- data.frame(
+  Name = namerC, 
+  Date = daterevC, 
+  IndividualRating = indiC, 
+  Review = reviC
+)
+framet1
+
+write.csv(framet1, file = "100_PRODUCT4.csv")
+
+
+```
+
+FIFTH
+```{r}
+#product1 
+
+urlD <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+sessiontD <- bow(urlD, user_agent = "Educational Purposes")
+sessiontD
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+sessiontD <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+#name of reviewr
+
+namerevD <- sessiontD %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerD<- namerevD[1:25]
+namerD
+
+#date of review
+dateD <- sessiontD %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateD
+daterevD <- dateD[1:25]
+daterevD
+
+
+#individual rating
+rateindiD <- sessiontD %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiD<- rateindiD[1:25]
+indiD
+
+
+#Review comment 
+revcomD <- sessiontD %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviD<- revcomD[1:25]
+reviD <- gsub("\n", "", revi)
+reviD
+
+framet5 <- data.frame(
+  Name = namerD, 
+  Date = daterevD, 
+  IndividualRating = indiD, 
+  Review = reviD
+)
+frame5
+
+write.csv(framet1, file = "100_PRODUCT5.csv")
+```
+SIXTH
+```{r}
+#product1 
+
+urle <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+sessiontE <- bow(urle, user_agent = "Educational Purposes")
+sessiontE
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+sessiontE <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+#name of reviewr
+
+namerevE <- sessiontE %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namerE<- namerevE[1:25]
+namerE
+
+#date of review
+dateE <- sessiontE %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+dateE
+daterevE <- dateE[1:25]
+daterevE
+
+
+#individual rating
+rateindiE <- sessiontE %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiE<- rateindiE[1:25]
+indiE
+
+
+#Review comment 
+revcomE <- sessiontE %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+reviE<- revcomE[1:25]
+reviE <- gsub("\n", "", revi)
+reviE
+
+framet6 <- data.frame(
+  Name = namerE, 
+  Date = daterevE, 
+  IndividualRating = indiE, 
+  Review = reviE
+)
+framet6
+
+write.csv(framet1, file = "100_PRODUCT6.csv")
+```
+
+```{r}
+#product1 
+
+urle <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+sessiont <- bow(urle, user_agent = "Educational Purposes")
+sessiont
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+sessiont <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+#name of reviewr
+
+namerev <- sessiont %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namer<- namerev[1:25]
+namer
+
+#date of review
+date <- sessiont %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date
+daterev <- date[1:25]
+daterev
+
+
+#individual rating
+rateindi <- sessiont %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indi<- rateindi[1:25]
+indi
+
+
+#Review comment 
+revcom <- sessiont %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
 revi<- revcom[1:25]
 revi <- gsub("\n", "", revi)
 revi
@@ -344,10 +1899,201 @@ framet1 <- data.frame(
 )
 framet1
 
-write.csv(framet1, file = "PRODUCT2.csv")
+write.csv(framet1, file = "100_PRODUCT7.csv")
 ```
 
 ```{r}
-write.csv(products, file = "ProductReviews.csv")
+#product1 
+
+urle <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+sessiont <- bow(urle, user_agent = "Educational Purposes")
+sessiont
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+sessiont <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+#name of reviewr
+
+namerev <- sessiont %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namer<- namerev[1:25]
+namer
+
+#date of review
+date <- sessiont %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date
+daterev <- date[1:25]
+daterev
+
+
+#individual rating
+rateindi <- sessiont %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indi<- rateindi[1:25]
+indi
+
+
+#Review comment 
+revcom <- sessiont %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+revi<- revcom[1:25]
+revi <- gsub("\n", "", revi)
+revi
+
+framet1 <- data.frame(
+  Name = namer, 
+  Date = daterev, 
+  IndividualRating = indi, 
+  Review = revi
+)
+framet1
+
+write.csv(framet1, file = "100_PRODUCT8.csv")
 ```
+
+```{r}
+#product1 
+
+urle <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+sessiont <- bow(urle, user_agent = "Educational Purposes")
+sessiont
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+sessiont <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+#name of reviewr
+
+namerev <- sessiont %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namer<- namerev[1:25]
+namer
+
+#date of review
+date <- sessiont %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date
+daterev <- date[1:25]
+daterev
+
+
+#individual rating
+rateindi <- sessiont %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indi<- rateindi[1:25]
+indi
+
+
+#Review comment 
+revcom <- sessiont %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+revi<- revcom[1:25]
+revi <- gsub("\n", "", revi)
+revi
+
+framet1 <- data.frame(
+  Name = namer, 
+  Date = daterev, 
+  IndividualRating = indi, 
+  Review = revi
+)
+framet1
+
+write.csv(framet1, file = "ReviewPRODUCT9.csv")
+```
+
+```{r}
+#product10
+
+urle <- "https://www.amazon.com/s?k=video+gaming&page=2&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&qid=1707404161&ref=sr_pg_1"
+
+sessiont <- bow(urle, user_agent = "Educational Purposes")
+sessiont
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr) 
+
+
+sessiont <- session("https://www.amazon.com/s?k=video+gaming&_encoding=UTF8&content-id=amzn1.sym.4b335ede-a344-46a5-af28-95a1242a7034&pd_rd_r=d6faa99d-7b4f-4f66-ba1b-51efdc7ad720&pd_rd_w=ZXfjw&pd_rd_wg=PaoPW&pf_rd_p=4b335ede-a344-46a5-af28-95a1242a7034&pf_rd_r=Y73JSEQDQKY4X4KXWZNR&ref=pd_gw_unk")
+
+#name of reviewr
+
+namerev <- sessiont %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namer<- namerev[1:25]
+namer
+
+#date of review
+date <- sessiont %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date
+daterev <- date[1:25]
+daterev
+
+
+#individual rating
+rateindi <- sessiont %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indi<- rateindi[1:25]
+indi
+
+
+#Review comment 
+revcom <- sessiont %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+
+revi<- revcom[1:25]
+revi <- gsub("\n", "", revi)
+revi
+
+framet1 <- data.frame(
+  Name = namer, 
+  Date = daterev, 
+  IndividualRating = indi, 
+  Review = revi
+)
+framet1
+
+write.csv(framet1, file = "ReviewPRODUCT10.csv")
+```
+
+
 
