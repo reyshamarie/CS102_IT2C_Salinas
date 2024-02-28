@@ -1,0 +1,809 @@
+---
+title: "LAB 3 10 MOVIES/SQL"
+output: html_document
+date: "2024-02-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+SCRAPE 10 MOVIES/ 10 REVIEWS
+```{r}
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr)
+library(readr)
+
+url <- "https://www.imdb.com/chart/top/?ref_=nv_mv_250"
+
+session <- bow(url, user_agent = "educational purposes")
+session
+
+movieurl <- read_html(url)
+```
+Get the 10 movies
+```{r}
+movietitle <- movieurl %>%
+    html_nodes("h3.ipc-title__text") %>%
+    html_text()
+
+#get only 10/subset
+movie_ten <- movietitle[2:11]
+movie_ten 
+```
+Get the url of the 10 movies
+```{r}
+#1st movie 
+movie1 <- "https://www.imdb.com/title/tt0111161/reviews?ref_=tt_urv"
+session1 <- bow(movie1, user_agent = "educational purposes")
+
+movie <- read_html(movie1)
+
+#2nd movie 
+movie2 <- "https://www.imdb.com/title/tt0068646/reviews?ref_=tt_urv"
+sessionm2<- bow(movie2, user_agent = "educational purposes")
+
+moviea <- read_html(movie2)
+
+#3rd movie 
+movie3 <- "https://www.imdb.com/title/tt0468569/reviews?ref_=tt_urv"
+session3 <- bow(movie3, user_agent = "educational purposes")
+
+movie3a <- read_html(movie3)
+
+#4th movie
+movie4 <- "https://www.imdb.com/title/tt0071562/reviews?ref_=tt_urv"
+session4 <- bow(movie4, user_agent = "educational purposes")
+
+movie4a <- read_html(movie4)
+
+#5th movie 
+movie5 <- "https://www.imdb.com/title/tt0050083/reviews?ref_=tt_urv"
+session5 <- bow(movie5, user_agent = "educational purposes")
+
+movie5a <- read_html(movie5)
+
+#6th movie 
+movie6 <- "https://www.imdb.com/title/tt0108052/reviews?ref_=tt_urv"
+session6 <- bow(movie6, user_agent = "educational purposes")
+
+movie6a <- read_html(movie6)
+
+#7th movie
+movie7 <- "https://www.imdb.com/title/tt0167260/reviews?ref_=tt_urv"
+session7 <- bow(movie7, user_agent = "educational purposes")
+
+movie7a <- read_html(movie7)
+
+#8th movie
+movie8<- "https://www.imdb.com/title/tt0110912/reviews?ref_=tt_urv"
+session8 <- bow(movie8, user_agent = "educational purposes")
+
+movie8a <- read_html(movie8)
+
+#9th movie
+movie9 <- "https://www.imdb.com/title/tt0120737/reviews?ref_=tt_urv"
+session9 <- bow(movie9, user_agent = "educational purposes")
+
+movie9a <- read_html(movie9)
+
+#10th movie 
+movie10 <- "https://www.imdb.com/title/tt0060196/reviews?ref_=tt_urv"
+session10 <- bow(movie10, user_agent = "educational purposes")
+
+movie10a <- read_html(movie10)
+```
+FIRST MOVIE
+```{r}
+#Get Title 
+
+title <- movie_ten[1]
+title
+
+#Reviewer name
+reviewername <- movie %>%
+  html_nodes("span.display-name-link") %>%
+  html_text()
+reviewername
+
+subsetreviewername <- reviewername[1:10]
+subsetreviewername
+
+#Review date
+date <- movie %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date
+
+
+subsetdate <- date[1:10]
+subsetdate
+
+#rating of the reviewer
+rating <- movie %>%
+  html_nodes("span.rating-other-user-rating") %>%
+  html_text()
+
+subsetrating <- rating[1:10]
+subsetrating
+
+ratesplit <- unlist(strsplit(subsetrating, "\\s+"))
+ratesplit
+
+splitrate <- ratesplit[c(2,4,6,8,10,12,14,16,18,20)]
+splitrate
+
+# review text content
+reviewtext <- movie %>%
+  html_nodes("div.text.show-more__control") %>%
+  html_text()
+
+subsetreviewtext <- reviewtext[1:10]
+subsetreviewtext
+
+#the review title.
+reviewtitle <- movie %>%
+  html_nodes("a.title") %>%
+  html_text()
+
+subsetreviewtitle <- reviewtitle[1:10]
+subsetreviewtitle
+
+review1 <- unlist(strsplit(subsetreviewtitle, "\n"))
+review1
+
+
+ #DATA FRAME FOR MOVIE 1
+
+moviedf1 <- data.frame(MovieTitle = title,
+                       Reviewer = subsetreviewername,
+                       ReviewDate = subsetdate,
+                       Stars = splitrate,
+                       Textreview = subsetreviewtext,
+                       TitleReview = review1
+                       )
+moviedf1
+write.csv(moviedf1, "FirstMovie.csv")
+```
+SECOND MOVIE
+```{r}
+#Get Title 
+title2 <- movie_ten[2]
+title2
+
+#Reviewer name
+reviewername2 <- moviea %>%
+  html_nodes("span.display-name-link") %>%
+  html_text()
+reviewername2
+
+subsetreviewername2 <- reviewername2[1:10]
+subsetreviewername2
+
+#Review date
+date2 <- moviea %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date2
+
+
+subsetdate2 <- date2[1:10]
+subsetdate2
+
+#rating of the reviewer
+rating2 <- moviea %>%
+  html_nodes("span.rating-other-user-rating") %>%
+  html_text()
+
+subsetrating2 <- rating2[1:10]
+subsetrating2
+
+ratesplit2 <- unlist(strsplit(subsetrating2, "\\s+"))
+ratesplit2
+
+splitrate2 <- ratesplit2[c(2,4,6,8,10,12,14,16,18,20)]
+splitrate2
+
+# review text content
+reviewtext2 <- moviea %>%
+  html_nodes("div.text.show-more__control") %>%
+  html_text()
+
+subsetreviewtext2 <- reviewtext2[1:10]
+subsetreviewtext2
+
+#the review title.
+reviewtitle2 <- moviea %>%
+  html_nodes("a.title") %>%
+  html_text()
+
+subsetreviewtitle2 <- reviewtitle2[1:10]
+subsetreviewtitle2
+
+review2 <- unlist(strsplit(subsetreviewtitle2, "\n"))
+review2
+ #DATA FRAME FOR MOVIE 2
+
+movie2df <- data.frame(MovieTitle = title2,
+                       Reviewer = subsetreviewername2,
+                       ReviewDate = subsetdate2,
+                       Stars = splitrate2,
+                       Textreview = subsetreviewtext2,
+                       TitleReview = review2
+                       )
+movie2df
+write.csv(movie2df, "SecondMovie.csv")
+```
+THIRD MOVIE
+```{r}
+#Get Title 
+title3 <- movie_ten[3]
+title3
+
+#Reviewer name
+reviewername3 <- movie3a %>%
+  html_nodes("span.display-name-link") %>%
+  html_text()
+reviewername3
+
+subsetreviewername3<- reviewername3[1:10]
+subsetreviewername3
+
+#Review date
+date3 <- movie3a %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date3
+
+
+subsetdate3 <- date3[1:10]
+subsetdate3
+
+#rating of the reviewer
+rating3 <- movie3a %>%
+  html_nodes("span.rating-other-user-rating") %>%
+  html_text()
+
+subsetrating3 <- rating3[1:10]
+subsetrating3
+
+ratesplit3 <- unlist(strsplit(subsetrating3, "\\s+"))
+ratesplit3
+
+splitrate3 <- ratesplit3[c(2,4,6,8,10,12,14,16,18,20)]
+splitrate3
+
+# review text content
+reviewtext3 <- movie3a %>%
+  html_nodes("div.text.show-more__control") %>%
+  html_text()
+
+subsetreviewtext3 <- reviewtext3[1:10]
+subsetreviewtext3
+
+#the review title.
+reviewtitle3 <- movie3a %>%
+  html_nodes("a.title") %>%
+  html_text()
+
+subsetreviewtitle3 <- reviewtitle3[1:10]
+subsetreviewtitle3
+
+review3 <- unlist(strsplit(subsetreviewtitle3, "\n"))
+review3
+ #DATA FRAME FOR MOVIE 3
+
+movie3df <- data.frame(MovieTitle = title3,
+                       Reviewer = subsetreviewername3,
+                       ReviewDate = subsetdate3,
+                       Stars = splitrate3,
+                       Textreview = subsetreviewtext3,
+                       TitleReview = review3
+                       )
+movie3df
+write.csv(movie3df, "ThirdMovie.csv")
+```
+FOURTH MOVIE
+```{r}
+#Get Title 
+title4 <- movie_ten[4]
+title4
+
+#Reviewer name
+reviewername4 <- movie4a %>%
+  html_nodes("span.display-name-link") %>%
+  html_text()
+reviewername4
+
+subsetreviewername4<- reviewername4[1:10]
+subsetreviewername4
+
+#Review date
+date4 <- movie4a %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date4
+
+
+subsetdate4 <- date4[1:10]
+subsetdate4
+
+#rating of the reviewer
+rating4 <- movie4a %>%
+  html_nodes("span.rating-other-user-rating") %>%
+  html_text()
+
+subsetrating4 <- rating4[1:10]
+subsetrating4
+
+ratesplit4 <- unlist(strsplit(subsetrating4, "\\s+"))
+ratesplit4
+
+splitrate4 <- ratesplit4
+splitrate4
+
+# review text content
+reviewtext4 <- movie4a %>%
+  html_nodes("div.text.show-more__control") %>%
+  html_text()
+
+subsetreviewtext4 <- reviewtext4[1:10]
+subsetreviewtext4
+
+#the review title.
+reviewtitle4 <- movie4a %>%
+  html_nodes("a.title") %>%
+  html_text()
+
+subsetreviewtitle4 <- reviewtitle4[1:10]
+subsetreviewtitle4
+
+review4 <- unlist(strsplit(subsetreviewtitle4, "\n"))
+review4
+ #DATA FRAME FOR MOVIE 4
+
+moviedf4 <- data.frame(MovieTitle = title4,
+                       Reviewer = subsetreviewername4,
+                       ReviewDate = subsetdate4,
+                       Stars = splitrate4,
+                       Textreview = subsetreviewtext4,
+                       TitleReview = review4
+                       )
+moviedf4
+write.csv(moviedf4, "FourthMovie.csv")
+```
+
+FIFTH MOVIE 
+```{r}
+#Get Title 
+title5 <- movie_ten[5]
+title5
+
+#Reviewer name
+reviewername5 <- movie5a %>%
+  html_nodes("span.display-name-link") %>%
+  html_text()
+reviewername5
+
+subsetreviewername5<- reviewername5[1:10]
+subsetreviewername5
+
+#Review date
+date5 <- movie5a %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date5
+
+
+subsetdate5 <- date5[1:10]
+subsetdate5
+
+#rating of the reviewer
+rating5 <- movie5a %>%
+  html_nodes("span.rating-other-user-rating") %>%
+  html_text()
+
+subsetrating5 <- rating5[1:10]
+subsetrating5
+
+ratesplit5 <- unlist(strsplit(subsetrating5, "\\s+"))
+ratesplit5
+
+splitrate5 <- ratesplit5
+splitrate5
+
+# review text content
+reviewtext5 <- movie5a %>%
+  html_nodes("div.text.show-more__control") %>%
+  html_text()
+
+subsetreviewtext5 <- reviewtext5[1:10]
+subsetreviewtext5
+
+#the review title.
+reviewtitle5 <- movie5a %>%
+  html_nodes("a.title") %>%
+  html_text()
+
+subsetreviewtitle5 <- reviewtitle5[1:10]
+subsetreviewtitle5
+
+review5 <- unlist(strsplit(subsetreviewtitle5, "\n"))
+review5
+ #DATA FRAME FOR MOVIE 5
+
+moviedf5 <- data.frame(MovieTitle = title5,
+                       Reviewer = subsetreviewername5,
+                       ReviewDate = subsetdate5,
+                       Stars = splitrate5,
+                       Textreview = subsetreviewtext5,
+                       TitleReview = review5
+                       )
+moviedf5
+```
+
+```{r}
+write.csv(moviedf5, "FifthMovie.csv")
+```
+
+SIXTH MOVIE
+```{r}
+
+#Get Title 
+title6 <- movie_ten[6]
+title6
+
+#Reviewer name
+reviewername6 <- movie6a %>%
+  html_nodes("span.display-name-link") %>%
+  html_text()
+reviewername6
+
+subsetreviewername6 <- reviewername6[1:10]
+subsetreviewername6
+
+#Review date
+date6 <- movie6a %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+subsetdate6 <- date6[1:10]
+subsetdate6
+
+#rating of the reviewer
+rating6 <- movie6a %>%
+  html_nodes("span.rating-other-user-rating") %>%
+  html_text()
+
+subsetrating6 <- rating6[1:10]
+subsetrating6
+
+ratesplit6 <- unlist(strsplit(subsetrating6, "\\s+"))
+splitrate6 <- ratesplit6
+
+# review text content
+reviewtext6 <- movie6a %>%
+  html_nodes("div.text.show-more__control") %>%
+  html_text()
+
+subsetreviewtext6 <- reviewtext6[1:10]
+subsetreviewtext6
+
+#the review title.
+reviewtitle6 <- movie6a %>%
+  html_nodes("a.title") %>%
+  html_text()
+
+subsetreviewtitle6 <- reviewtitle6[1:10]
+subsetreviewtitle6
+
+review6 <- unlist(strsplit(subsetreviewtitle6, "\n"))
+
+# DATA FRAME FOR MOVIE 6
+moviedf6 <- data.frame(MovieTitle = title6,
+                       Reviewer = subsetreviewername6,
+                       ReviewDate = subsetdate6,
+                       Stars = splitrate6,
+                       Textreview = subsetreviewtext6,
+                       TitleReview = review6
+                       )
+moviedf6
+write.csv(moviedf6, "SixthMovie.csv")
+```
+SEVENTH MOVIE
+```{r}
+#Get Title 
+title7 <- movie_ten[7]
+title7
+
+#Reviewer name
+reviewername7 <- movie7a %>%
+  html_nodes("span.display-name-link") %>%
+  html_text()
+reviewername7
+
+subsetreviewername7<- reviewername7[1:10]
+subsetreviewername7
+
+#Review date
+date7 <- movie7a %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date7
+
+subsetdate7 <- date7[1:10]
+subsetdate7
+
+#rating of the reviewer
+rating7 <- movie7a %>%
+  html_nodes("span.rating-other-user-rating") %>%
+  html_text()
+
+subsetrating7 <- rating7[1:10]
+subsetrating7
+
+ratesplit7 <- unlist(strsplit(subsetrating7, "\\s+"))
+ratesplit7
+
+splitrate7 <- ratesplit7
+splitrate7
+
+# review text content
+reviewtext7 <- movie7a %>%
+  html_nodes("div.text.show-more__control") %>%
+  html_text()
+
+subsetreviewtext7 <- reviewtext7[1:10]
+subsetreviewtext7
+
+#the review title.
+reviewtitle7 <- movie7a %>%
+  html_nodes("a.title") %>%
+  html_text()
+
+subsetreviewtitle7 <- reviewtitle7[1:10]
+subsetreviewtitle7
+
+review7 <- unlist(strsplit(subsetreviewtitle7, "\n"))
+review7
+ #DATA FRAME FOR MOVIE 7
+
+moviedf7 <- data.frame(MovieTitle = title7,
+                       Reviewer = subsetreviewername7,
+                       ReviewDate = subsetdate7,
+                       Stars = splitrate7,
+                       Textreview = subsetreviewtext7,
+                       TitleReview = review7
+                       )
+moviedf7
+write.csv(moviedf7, "SeventhMovie.csv")
+```
+EIGHTH MOVIE
+```{r}
+#Get Title 
+title8 <- movie_ten[8]
+title8
+
+#Reviewer name
+reviewername8 <- movie8a %>%
+  html_nodes("span.display-name-link") %>%
+  html_text()
+reviewername8
+
+subsetreviewername8<- reviewername8[1:10]
+subsetreviewername8
+
+#Review date
+date8 <- movie8a %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date8
+
+subsetdate8 <- date8[1:10]
+subsetdate8
+
+#rating of the reviewer
+rating8 <- movie8a %>%
+  html_nodes("span.rating-other-user-rating") %>%
+  html_text()
+
+subsetrating8 <- rating8[1:10]
+subsetrating8
+
+ratesplit8 <- unlist(strsplit(subsetrating8, "\\s+"))
+ratesplit8
+
+splitrate8 <- ratesplit8
+splitrate8
+
+# review text content
+reviewtext8 <- movie8a %>%
+  html_nodes("div.text.show-more__control") %>%
+  html_text()
+
+subsetreviewtext8 <- reviewtext8[1:10]
+subsetreviewtext8
+
+#the review title.
+reviewtitle8 <- movie8a %>%
+  html_nodes("a.title") %>%
+  html_text()
+
+subsetreviewtitle8 <- reviewtitle8[1:10]
+subsetreviewtitle8
+
+review8 <- unlist(strsplit(subsetreviewtitle8, "\n"))
+review8
+ #DATA FRAME FOR MOVIE 8
+
+moviedf8 <- data.frame(MovieTitle = title8,
+                       Reviewer = subsetreviewername8,
+                       ReviewDate = subsetdate8,
+                       Stars = splitrate8,
+                       Textreview = subsetreviewtext8,
+                       TitleReview = review8
+                       )
+moviedf8
+write.csv(moviedf8, "EighthMovie.csv")
+```
+NINTH MOVIE 
+```{r}
+#Get Title 
+title9 <- movie_ten[9]
+title9
+
+#Reviewer name
+reviewername9 <- movie9a %>%
+  html_nodes("span.display-name-link") %>%
+  html_text()
+reviewername9
+
+subsetreviewername9 <- reviewername9[1:10]
+subsetreviewername9
+
+#Review date
+date9 <- movie9a %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date9
+
+subsetdate9 <- date9[1:10]
+subsetdate9
+
+#rating of the reviewer
+rating9 <- movie9a %>%
+  html_nodes("span.rating-other-user-rating") %>%
+  html_text()
+
+subsetrating9 <- rating9[1:10]
+subsetrating9
+
+ratesplit9 <- unlist(strsplit(subsetrating9, "\\s+"))
+ratesplit9
+
+splitrate9 <- ratesplit9
+splitrate9
+
+# review text content
+reviewtext9 <- movie9a %>%
+  html_nodes("div.text.show-more__control") %>%
+  html_text()
+
+subsetreviewtext9 <- reviewtext9[1:10]
+subsetreviewtext9
+
+#the review title.
+reviewtitle9 <- movie9a %>%
+  html_nodes("a.title") %>%
+  html_text()
+
+subsetreviewtitle9 <- reviewtitle9[1:10]
+subsetreviewtitle9
+
+review9 <- unlist(strsplit(subsetreviewtitle9, "\n"))
+review9
+ #DATA FRAME FOR MOVIE 9
+
+moviedf9 <- data.frame(MovieTitle = title9,
+                       Reviewer = subsetreviewername9,
+                       ReviewDate = subsetdate9,
+                       Stars = splitrate9,
+                       Textreview = subsetreviewtext9,
+                       TitleReview = review9
+                       )
+moviedf9
+write.csv(moviedf9, "NinthMovie.csv")
+```
+TENTH MOVIE
+```{r}
+#Get Title 
+title10 <- movie_ten[10]
+title10
+
+#Reviewer name
+reviewername10 <- movie10a %>%
+  html_nodes("span.display-name-link") %>%
+  html_text()
+reviewername10
+
+subsetreviewername10 <- reviewername10[1:10]
+subsetreviewername10
+
+#Review date
+date10 <- movie10a %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+date10
+
+subsetdate10 <- date10[1:10]
+subsetdate10
+
+#rating of the reviewer
+rating10 <- movie10a %>%
+  html_nodes("span.rating-other-user-rating") %>%
+  html_text()
+
+subsetrating10 <- rating10[1:10]
+subsetrating10
+
+ratesplit10 <- unlist(strsplit(subsetrating10, "\\s+"))
+ratesplit10
+
+splitrate10 <- ratesplit10
+splitrate10
+
+# review text content
+reviewtext10 <- movie10a %>%
+  html_nodes("div.text.show-more__control") %>%
+  html_text()
+
+subsetreviewtext10 <- reviewtext10[1:10]
+subsetreviewtext10
+
+#the review title.
+reviewtitle10 <- movie10a %>%
+  html_nodes("a.title") %>%
+  html_text()
+
+subsetreviewtitle10 <- reviewtitle10[1:10]
+subsetreviewtitle10
+
+review10 <- unlist(strsplit(subsetreviewtitle10, "\n"))
+review10
+ #DATA FRAME FOR MOVIE 10
+
+moviedf10 <- data.frame(MovieTitle = title10,
+                       Reviewer = subsetreviewername10,
+                       ReviewDate = subsetdate10,
+                       Stars = splitrate10,
+                       Textreview = subsetreviewtext10,
+                       TitleReview = review10
+                       )
+moviedf10
+write.csv(moviedf10, "TenthMovie.csv")
+```
+
+```{r}
+moviesframe <- bind_rows( moviedf1, 
+                  movie2df,
+                   movie3df, 
+                   moviedf4, 
+                  moviedf5, 
+                  moviedf6, 
+                  moviedf7,
+                  moviedf8, 
+                  moviedf9, 
+                 moviedf10)
+moviesframe
+```
+WRITE/READ CSV FILE
+```{r}
+write.csv(moviesframe, "IMDBTenmovies.csv")
+
+read.csv("IMDBTenmovies.csv")
+```
+
+
+
+
