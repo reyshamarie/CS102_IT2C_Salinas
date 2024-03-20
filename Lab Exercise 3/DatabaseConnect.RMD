@@ -1,0 +1,39 @@
+---
+title: "ConnectDatabase.Rmd"
+output: html_document
+date: "2024-03-18"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(RMariaDB)
+library(RMySQL)
+
+connection <- dbConnect(RMySQL::MySQL(), 
+                        dsn="MySQL-connection",
+                        Server = "localhost",
+                        dbname = "ReviewsData", 
+                        user = "root", 
+                        password = "")  
+
+```
+
+
+```{r}
+#show columns in database
+columns <- dbGetQuery(connection, "SELECT * FROM ReviewsData.reviews")
+glimpse(columns)
+
+#read the reviews data
+review <- read.csv("FirstMovie.csv")
+```
+
+```{r}
+readdata <- read.csv("IMDBTenmovies.csv") 
+readdata
+```
+
