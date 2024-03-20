@@ -1,0 +1,103 @@
+---
+title: "Arsiv Articles"
+author: "Reysha Marie S. Salinas"
+date: "2024-03-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(dplyr)
+library(stringr)
+library(httr)
+library(rvest)
+
+begin <- proc.time()
+
+Title <- Author <- Subject <- Abstract <- Meta <- vector("character")
+
+urllink <- 'https://arxiv.org/search/?query=System+Development&searchtype=all&source=header'
+pages <- seq(from = 0, to = 100, by = 50)
+
+for(page in pages) {
+  
+  pasteurl <- paste0(urllink, page)
+
+  articlescrapes <- read_html(pasteurl) %>% 
+    html_nodes('p.list-title.is-inline-block') %>% 
+    html_nodes('a[href^="https://arxiv.org/abs"]') %>% 
+    html_attr('href')
+  
+  
+  for(articlescrape in articlescrapes) {
+  
+    articlepage <- read_html(articlescrape)
+
+    
+    articletitle <- articlepage %>% html_nodes('h1.title.mathjax') %>% html_text(TRUE)
+    articletitle <- gsub('Title:', '', articletitle)
+    Title <- c(Title, articletitle)
+    
+    
+    articleauthor <- articlepage %>% html_nodes('div.authors') %>% html_text(TRUE)
+    articleauthor <- gsub('Authors:','',articleauthor)
+    Author <- c(Author, articleauthor)
+    
+
+    articlesubject <- articlepage %>% html_nodes('span.primary-subject') %>% html_text(TRUE)
+    Subject <- c(Subject, articlesubject)
+    
+  
+    articleabstract <- articlepage %>% html_nodes('blockquote.abstract.mathjax') %>% html_text(TRUE)
+    articleabstract <- sub('Abstract:','',articleabstract)
+    Abstract <- c(Abstract, articleabstract)
+    
+  
+    articlemeta <- articlepage %>% html_nodes('div.submission-history') %>% html_text(TRUE)
+    articlemeta <- gsub('\\s+', ' ',articlemeta)
+    articlemeta <- strsplit(articlemeta, '[v1]', fixed = T)
+    articlemeta <- articlemeta[[1]][2] %>% unlist %>% str_trim
+    Meta <- c(Meta, articlemeta)
+    
+    
+   cat("article:", length(Title), "\n")
+    Sys.sleep(1)
+  }
+}
+
+paper <- data.frame(Title, Author, Subject, Abstract, Meta)
+paper
+
+end <- proc.time()
+end - begin 
+
+
+save(paper, file = "System_Development_Article.RData")
+write.csv(paper, file = "SystemArticles.csv")
+
+```
+
+
+
+```{r}
+library(DBI)
+library(odbc)
+library(RMySQL)
+library(dplyr,dbplyr)
+connection <- dbConnect(RMySQL::MySQL(),
+                        dsn="MariaDB-connection",
+                        Server = "localhost",
+                        dbname = "systemdevelopment", 
+                        user = "root", 
+                        password = "") 
+
+```
+
+
+
+```
+
