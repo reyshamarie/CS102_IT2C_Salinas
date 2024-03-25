@@ -1,0 +1,75 @@
+---
+title: "lab5"
+author: "Reysha Marie S.SALINAS"
+date: "2024-03-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Articles Cleaning 
+
+```{r}
+
+# Load libraries
+library(tidyverse)  
+library(stringr)    
+
+# Read the data
+data <- read.csv("unclean_data/SystemArticles.csv")
+
+
+clean_cols <- c("Title", "Author", "Subject", "Abstract")  
+# Columns to clean
+for (col in clean_cols) {
+  data[, col] <- str_to_lower(data[, col]) %>%
+                 str_replace_all("\\p{Emoji}", "")
+}
+
+
+data$Meta <- as.Date(data$Meta, format = "%a, %d %b %Y %H:%M:%S UTC")                      
+# Save the cleaned data
+write.csv(data, "clean_data/systemarticles.csv")
+
+```
+
+Reviews Cleaning 
+```{r}
+# Read the data from the CSV file
+data <- read.csv("unclean_data/2,500Reviews.csv")
+
+# Get the first 5 rows
+head(data, 5)
+
+```
+clean reviews data
+```{r}
+library(readr)
+library(stringr)
+library(dplyr)
+
+# convert date and rating to integer
+products_reviews <- data %>%
+  mutate(
+    Date       = as.Date(str_extract(Date, "\\d+\\s[A-Za-z]+\\s\\d+"), format = "%d %b %Y"),
+    IndividualRating    = as.integer(str_extract(IndividualRating, "\\d+\\.\\d+"))
+  )
+
+# Clean columns
+products_reviews <- products_reviews %>%
+  mutate(across(c(Product, ReviewerName, ReviewText), ~ str_replace_all(.x, "\\p{So}", ""))) %>%  
+  # Remove emoticons
+  mutate(across(c(Product, ReviewerName, ReviewText), ~ gsub("[^a-zA-Z ]", "", .x))) %>%         
+  # Remove non-alphabetical characters
+  mutate(across(c(Product, ReviewerName, ReviewText), ~ na_if(.x, "")))                      
+    # Replace blank strings with NA
+
+# Convert text columns to lowercase
+products_reviews <- products_reviews %>%
+  mutate(across(where(is.character), tolower))
+
+# Write the cleaned dataset to CSV
+write.csv(products_reviews, "clean_data/reviews.csv")
+```
