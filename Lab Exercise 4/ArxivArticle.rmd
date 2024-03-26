@@ -2,7 +2,9 @@
 title: "Arsiv Articles"
 author: "Reysha Marie S. Salinas"
 date: "2024-03-20"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -10,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r}
+```{r eval = FALSE}
 library(dplyr)
 library(stringr)
 library(httr)
@@ -75,15 +77,20 @@ paper
 end <- proc.time()
 end - begin 
 
-
+#save data to RData
 save(paper, file = "System_Development_Article.RData")
+
+#save data to csv file
 write.csv(paper, file = "SystemArticles.csv")
 
 ```
 
 
 
-```{r}
+```{r eval = FALSE}
+#connect to database 
+
+
 library(DBI)
 library(odbc)
 library(RMySQL)
@@ -97,7 +104,31 @@ connection <- dbConnect(RMySQL::MySQL(),
 
 ```
 
+```{r eval = FALSE}
+library(readr)
+#read file 
+data <- read.csv("SystemArticles.csv")
 
+#load data/ articles
+head(data)
 
 ```
+
+```{r eval = FALSE}
+#write tables in db
+#dbListTables(connection)
+
+#dbListFields(connection,'arxiv')
+
+#Insert data to database
+#dbWriteTable(connection, 'arxiv', data,append = TRUE)
+```
+
+
+
+```{r eval = FALSE}
+data <- dbGetQuery(connection, "SELECT * FROM systemdevelopment.arxiv")
+glimpse(data)
+```
+
 
