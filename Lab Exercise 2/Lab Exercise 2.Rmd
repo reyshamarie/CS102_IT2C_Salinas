@@ -13,9 +13,10 @@ knitr::opts_chunk$set(echo = TRUE)
 (SCRAPE 5O PRODUCTS / 50 PRODUCTS 5O /name/type/date/individual/review)
 
 24/50 PRODUCTS
+
+
 ```{r }
 #get first half of 50 - 24 PRODUCTS
-
 library(rvest)
 library(dplyr)
 library(polite)
@@ -122,22 +123,6 @@ session
 
 url1_.3<- read_html(url1.3)
 
-
-#get the reviewer names add 13 add 12 more
-
-name1.2 <- url1_.2 %>%
-    html_nodes("div.a-profile-content") %>%
-    html_text()
-name1.2 
-
-
-#get the reviewer names add  12
-name1.3 <- url1_.3 %>%
-    html_nodes("div.a-profile-content") %>%
-    html_text()
-name1.3
-
-
 #--
 #get the reviewer names 13 .add 37
 name1 <- url1_ %>%
@@ -165,9 +150,53 @@ name1.2
 #get the reviewer names add  12
 name1.3 <- url1_.3 %>%
     html_nodes("div.a-profile-content") %>%
-    html_text()
+    html_text(trim = TRUE)
 name1.3
 
+#title 
+title1 <- url1_ %>%
+   html_nodes("span") %>%
+  html_text()
+t1 <- title1 [c(72,81,123,141,159,177, 195,213 ,231, 249,257, 280,298)] 
+
+title2 <- url1_.1 %>%
+   html_nodes("span") %>%
+  html_text()
+t2 <- title2   [c(72,81,123,141,159,177, 195,213 ,232, 250, 268,286)]  
+
+title3 <- url1_.2 %>%
+   html_nodes("span") %>%
+  html_text()
+t3 <- title3 [c(72,81,123,141,159,175, 194,213 ,232, 251, 268,287)] 
+t3 <- t3 %>% str_trim()
+
+title4<- url1_.3%>%
+   html_nodes("span") %>%
+  html_text()
+t4 <- title4  [c(72,81,123,141,159,177, 185,204 ,220, 239, 247,266,285, 303)] 
+
+t4 <- t4 %>% str_trim()
+
+
+#type of purhcase 
+purchase1.1 <- url1_.1 %>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+purchase1.1
+
+purchase1.2<- url1_.2%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+purchase1.2
+
+purchase1.3 <- url1_.3%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+purchase1.3
+
+
+#sub 
+purchase1.3_ <- purchase1.3[1:22]
 
 #type of purhcase 
 purchase1 <- url1_ %>%
@@ -194,6 +223,7 @@ purchase1.3
 
 #sub 
 purchase1.3_ <- purchase1.3[1:22]
+
 #date 
 date1 <- url1_%>%
     html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
@@ -278,6 +308,12 @@ dataname <- data.frame(
 )
 dataname
 
+#title review
+#title or review
+datatitle <- data.frame(
+  TitleofReview = c (t1,t2,t3, t4)
+)
+
 #type of purchase data frame
 datapurchaseType <- data.frame(
     TypeOfPurchase = c(purchase1,purchase1.1,purchase1.2, purchase1.3_)
@@ -306,6 +342,7 @@ review
 
 # Selecting 50 rows from each data frame
 selected_dataname <- head(dataname, 50)
+selected_datatitle <- head(datatitle, 50)
 selected_datapurchaseType <- head(datapurchaseType, 50)
 selected_dataDate <- head(dataDate, 50)
 selected_rate <- head(rate, 50)
@@ -318,6 +355,7 @@ selected_review <- head(review, 50)
 #combined dataframes
 combinedproduct1 <- data.frame(  
         Product = pro,
+        Title_of_Review = selected_datatitle,
         Name = selected_dataname,
         TypeOfPurchase = selected_datapurchaseType,
         Date = selected_dataDate, 
@@ -397,8 +435,37 @@ name2.3 <- url2_.3 %>%
     html_text()
 name2.3 <- name2.3[3:12]
 name2.3
+```
+#2 title of Review
+```{r} 
+#title 
+title2 <- url2_ %>%
+   html_nodes("span") %>%
+  html_text()
+title2 <- title2 [c(71,82,119,127,147,165,173,192,210, 218,236 ,254, 273)] 
+title2 <- title2 %>% str_trim()
 
+title2.1 <- url2_.1 %>%
+   html_nodes("span") %>%
+  html_text()
+title2.1 <- title2.1   [c(71,82,126,147,164,182,192,210,230,251,269,283 ,300)] 
+title2.1 <- title2.1 %>% str_trim()
 
+title2.2 <- url2_.2 %>%
+   html_nodes("span") %>%
+  html_text()
+title2.2 <- title2.2 [c(71,81,123,141,159, 175,194 ,213, 232, 251,269, 287)] 
+title2.2 <- title2.2 %>% str_trim()
+title2.2
+
+title2.3<- url2_.3%>%
+   html_nodes("span") %>%
+  html_text()
+title2.3 <- title2.3  [c(71,82,127,147,156,171,179, 207,227 ,243, 261, 278,293, 307)]
+title2.3 <- title2.3 %>% str_trim()
+title2.3
+```
+```{r} 
 #type of purhcase 
 purchase2 <- url2_ %>%
     html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
@@ -459,6 +526,7 @@ rate2.1
 rate2.2<- url2_.2%>%
     html_nodes("span.a-icon-alt") %>%
     html_text()
+
 rate2.2 
 
 rate2.3<- url2_.3%>%
@@ -493,6 +561,11 @@ review2.3 <- url2_.3 %>%
 review2.3<- review2.3[1:30]
 
 # DATA FRAMES
+
+titleRev <- data.frame(
+  TitleOfReview = c(title2,title2.1,title2.2,title2.3)[1:50]
+)
+
 dataname2 <- data.frame(
     ReviewerName = c(name2, name2.1, name2.2, name2.3)[1:50]
 )
@@ -519,11 +592,12 @@ review_dataframe2 <- data.frame(
  
 combinedproduct2 <- data.frame( 
    Product = pro2,
-   ReviewerName = dataname2$ReviewerName,
-   TypeOfPurchase = datapurchaseType2$TypeOfPurchase,
-   Date = dataDate2$Date,
-   IndividualRating = rate2$IndividualRating,
-    ReviewText = review_dataframe2$ReviewText
+   TitleOfreview = titleRev,
+   ReviewerName = dataname2,
+   TypeOfPurchase = datapurchaseType2,
+   Date = dataDate2,
+   IndividualRating = rate2,
+    ReviewText = review_dataframe2
 )
 
 combinedproduct2
@@ -610,13 +684,39 @@ name3.4 <- url3_.4 %>%
 name3.4 <- name3.4[3:12]
 name3.4
 
+#title 
+title3 <- url3_ %>%
+   html_nodes("span") %>%
+  html_text()
+title3 <- title3 [c(72,83,125,144,163,181, 199,217 ,235, 253,271, 289)]  %>% str_trim()
+
+
+title3.1 <- url3_.1 %>%
+   html_nodes("span") %>%
+  html_text()
+title3.1 <- title3.1   [c(72,83,125,144,162,180, 198,217 ,235, 253, 271,289)]  %>% str_trim()
+
+title3.2 <- url3_.2 %>%
+   html_nodes("span") %>%
+  html_text()
+title3.2 <- title3.2 [c(72,83,125,149,167,185, 204,222 ,240, 258, 276,295)] 
+title3.2 <- title3.2 %>% str_trim()
+
+title3.3<- url3_.3%>%
+   html_nodes("span") %>%
+  html_text()
+title3.3 <- title3.3  [c(72,83,125,144,162,180, 198,216 ,234, 252, 260,278,297)] 
+
+title3.3 <- title3.3 %>% str_trim()
+
 #type of purhcase 
 purchase3<- url3_ %>%
     html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
     html_text()
 purchase3
 
-  #type of purhcase 
+  #type of purhcase
+
   purchase3.1 <- url3_.1 %>%
       html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
       html_text()
@@ -722,6 +822,11 @@ dataname3 <- data.frame(
 )
 dataname3
 
+TitleRev3 <- data.frame(
+    TitleOfReview = c(title3, title3.1, title3.2, title3.3)[1:50]
+)
+TitleRev3
+
 datapurchaseType3 <- data.frame(
     TypeOfPurchase = c(purchase3, purchase3.1, purchase3.2, purchase3.3, purchase3.4)[1:50]
 )
@@ -745,11 +850,12 @@ review_dataframe3 <- data.frame(
      
 combinedproduct3 <- data.frame( 
           Product = pro3,
-          ReviewerName = dataname3$ReviewerName,
-          TypeOfPurchase = datapurchaseType3$TypeOfPurchase,
-          Date = dataDate3$Date,
-          IndividualRating = rate3$IndividualRating,
-          ReviewText = review_dataframe3$ReviewText
+          TitleOfReview = TitleRev3,
+          ReviewerName = dataname3,
+          TypeOfPurchase = datapurchaseType3,
+          Date = dataDate3,
+          IndividualRating = rate3,
+          ReviewText = review_dataframe3
 )
 
 combinedproduct3
@@ -795,7 +901,7 @@ session
 url4_.4 <- read_html(url4.4)
 
 # Reviews for product 4
-# Name/Type/Date/Individual/Review (50)
+# Name/Titleofreview/Type/Date/Individual/Review (50)
 
 # Get the reviewer names
 name4 <- url4_ %>%
@@ -825,6 +931,37 @@ name4.4 <- url4_.4 %>%
     html_nodes("div.a-profile-content") %>%
     html_text()
 name4.4 <- name4.4[3:12]
+
+#Title of review
+title4 <- url4_ %>%
+   html_nodes("span") %>%
+  html_text()
+title4 <- title4 [c(72,81,126,144,162,180,188,206,224,246,263,277,285,299)]  %>% str_trim()
+
+
+title4.1 <- url4_.1 %>%
+   html_nodes("span") %>%
+  html_text()
+title4.1 <- title4.1   [c(72,83,125,144,162,180, 198,217 ,235, 253, 271,289)]  %>% str_trim()
+
+title4.2 <- url4_.2 %>%
+   html_nodes("span") %>%
+  html_text()
+title4.2 <- title4.2 [c(72,81,130,147,161,175, 183,200 ,220, 240, 260,280,297)] %>% str_trim()
+
+title4.3<- url4_.3%>%
+   html_nodes("span") %>%
+  html_text()
+title4.3 <- title4.3  [c(72,81,127,142,157,174, 191,208 ,218, 236, 256,273,291)]  %>% str_trim()
+
+
+#start again
+title4.4<- url4_.4%>%
+   html_nodes("span") %>%
+  html_text()
+title4.4 <- title4.4  [c(72,81,126,130,151,168, 185,205 ,222, 240, 257,274,294)]  %>% str_trim()
+
+
 
 # Type of purchase 
 purchase4 <- url4_ %>%
@@ -938,6 +1075,10 @@ dataname4 <- data.frame(
 )
 dataname4
 
+TitleRev4 <- data.frame(
+  TitleOfReview =c(title4, title4.1, title4.2, title4.3, title4.4)[1:50]
+)
+
 datapurchaseType4 <- data.frame(
     TypeOfPurchase = c(purchase4, purchase4.1, purchase4.2, purchase4.3, purchase4.4)[1:50]
 )
@@ -960,11 +1101,12 @@ review_dataframe4 <- data.frame(
      
 combinedproduct4 <- data.frame( 
   Product = pr4,
-  ReviewerName = dataname4$ReviewerName,
-  TypeOfPurchase = datapurchaseType4$TypeOfPurchase,
-  Date = dataDate4$Date,
-  IndividualRating = rate4$IndividualRating,
-  ReviewText = review_dataframe4$ReviewText
+  TitleOfreview = TitleRev4,
+  ReviewerName = dataname4, 
+  TypeOfPurchase = datapurchaseType4,
+  Date = dataDate4,
+  IndividualRating = rate4,
+  ReviewText = review_dataframe4
 )
 
 combinedproduct4
@@ -1007,7 +1149,8 @@ session
 url5_.4 <- read_html(url5.4)
 
 # Reviews for product 5
-# Name/Type/Date/Individual/Review (50)
+# Name/Type/Date/Individual/Review (50) 
+#add title of review
 
 # Get the reviewer names
 name5 <- url5_ %>%
@@ -1037,6 +1180,35 @@ name5.4 <- url5_.4 %>%
     html_nodes("div.a-profile-content") %>%
     html_text()
 name5.4 <- name5.4[3:12]
+
+
+#Title of review 
+title5 <- url5_ %>%
+   html_nodes("span") %>%
+  html_text()
+title5 <- title5 [c(108,126,144,166,187,208,225,243,263,280)]  %>% str_trim()
+title5
+
+title5.1 <- url5_.1 %>%
+   html_nodes("span") %>%
+  html_text()
+title5.1 <- title5.1   [c(108,126,144,166,187,208 ,225, 243, 263,280)]  %>% str_trim()
+
+title5.2 <- url5_.2 %>%
+   html_nodes("span") %>%
+  html_text()
+title5.2 <- title5.2 [c(112,133,150, 168,188 ,209, 230, 250,175,291)] %>% str_trim()
+
+title5.3<- url5_.3%>%
+   html_nodes("span") %>%
+  html_text()
+title5.3 <- title5.3  [c(112,132,142,160,177, 195,216 ,233, 251, 271,281,301)]  %>% str_trim()
+
+
+title5.4<- url5_.4%>%
+   html_nodes("span") %>%
+  html_text()
+title5.4 <- title5.4  [c(112,132,149, 163,181 ,202, 222, 243,264,281)]  %>% str_trim()
 
 # Type of purchase 
 purchase5 <- url5_ %>%
@@ -1150,6 +1322,11 @@ dataname5 <- data.frame(
 )
 dataname5
 
+TitleRev5 <- data.frame(
+  TitleOfReview = c(title5, title5.1, title5.2, title5.3, title5.4)[1:50]
+)
+TitleRev5
+
 datapurchaseType5 <- data.frame(
     TypeOfPurchase = c(purchase5, purchase5.1, purchase5.2, purchase5.3, purchase5.4)[1:50]
 )
@@ -1172,11 +1349,12 @@ review_dataframe5 <- data.frame(
 
 combinedproduct5 <- data.frame( 
   Product = pro5,
-  ReviewerName = dataname5$ReviewerName,
-  TypeOfPurchase = datapurchaseType5$TypeOfPurchase,
-  Date = dataDate5$Date,
-  IndividualRating = rate5$IndividualRating,
-  ReviewText = review_dataframe5$ReviewText
+  TitleOfReview = TitleRev5,
+  ReviewerName = dataname5,
+  TypeOfPurchase = datapurchaseType5,
+  Date = dataDate5,
+  IndividualRating = rate5,
+  ReviewText = review_dataframe5
 )
 
 combinedproduct5
@@ -1248,6 +1426,28 @@ name6.3 <- url6_.3 %>%
 name6.3 <- name6.3[3:12]
 name6.3 
 
+#Title of review 
+title6 <- url6_ %>%
+   html_nodes("span") %>%
+  html_text()
+title6 <- title6 [c(71,82,124,132,150,176,184,206,227,248,268,286,303,323)]  %>% str_trim()
+title6
+
+title6.1 <- url6_.1 %>%
+   html_nodes("span") %>%
+  html_text()
+title6.1 <- title6.1   [c(71,82,124,143,151,173,190,218 ,232, 250, 271,289)]  %>% str_trim()
+
+title6.2 <- url6_.2 %>%
+   html_nodes("span") %>%
+  html_text()
+title6.2 <- title6.2 [c(71,82,124,143,166,186, 196,212 ,229, 247, 265,282,299)] %>% str_trim()
+
+title6.3<- url6_.3%>%
+   html_nodes("span") %>%
+  html_text()
+title6.3 <- title6.3  [c(71,82,124,143,151,173,190,218 ,232, 250, 271,289)]  %>% str_trim()
+ #resume here
 
 # Type of purchase 
 purchase6 <- url6_ %>%
